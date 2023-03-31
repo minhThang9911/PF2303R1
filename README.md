@@ -1,2 +1,2 @@
 # PF2303R1
-Bài tập Nhập Môn Lập Trình
+Nền tảng lập trình với JavaScript (Module 2)
