@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tính chu vi và diện tích hình tròn</title>
+</head>
+
+<body>
+
+    <script>
+        let r = parseInt(prompt("Nhập bán kính của hình tròn: ", 0))
+        let d = r*2
+        let c = (d*Math.PI).toFixed(2)
+        let s = ((r**2)*Math.PI).toFixed(2)
+        document.write(`
+        Bán kính: ${r} <br />
+        Đường kính: ${d} <br />
+        Chu vi: ${c} <br />
+        Diện tích: ${s} <br />
+        `)
+    </script>
+</body>
+
+</html>

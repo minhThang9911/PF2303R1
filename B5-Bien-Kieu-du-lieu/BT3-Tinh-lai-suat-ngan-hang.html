@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tính lãi suất ngân hàng</title>
+</head>
+<body>
+    <script>
+        let soTienVay = parseFloat(prompt('Nhập số tiền vay:'),0)
+        let laiSuat = parseFloat(prompt('Nhập lãi suất:'),0)
+        let soNam = parseFloat(prompt('Nhập số năm:'),0)
+        let soTienTra = (soTienVay*(1+soNam*laiSuat/100)).toFixed(1)
+        document.write(`
+        Lãi suất ngân hàng theo công thức tính lãi đơn: <br />
+        Số tiền vay: ${soTienVay} <br />
+        Lãi suất: ${laiSuat}%<br />
+        Số năm ( n ): ${soNam}<br />
+        Số tiền phải trả sau n năm: ${soTienTra}
+        `)
+    </script>
+</body>
+</html>

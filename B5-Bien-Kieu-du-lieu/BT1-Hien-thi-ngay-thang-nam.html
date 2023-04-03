@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Hiển thị ngày-tháng-năm</title>
+</head>
+
+<body>
+    <script>
+        let nam = prompt("Năm: ", 0).padStart(4,"0")
+        let thang = prompt("Tháng: ", 0).padStart(2,"0")
+        let ngay = prompt("Ngày: ", 0).padStart(2,"0")
+        document.write(`Ngày - tháng - năm (dd-mm-yyyy): ${ngay}-${thang}-${nam}`)
+    </script>
+</body>
+
+</html>
