@@ -211,23 +211,13 @@
             let ans = 0
             let expresion = ''
             let space = ''
-            let spaceAfter = true
             function inputValue(val, exp) {
-                if(spaceAfter) {
+                if (val === '.' || input.innerText.slice(-1) === '.') {
+                    space = ''
+                } else {
                     space = ' '
-                } else {
-                    space = ''
-                    spaceAfter = true
                 }
-                if (val === '.' || val === 'e') {
-                    space = ''
-                    spaceAfter = false
-                } else {
-                    space = ' '                
-                }
-                
                 input.innerText += space + val
-                spaceAfter = true
                 if (typeof exp === "undefined") {
                     expresion += val
                 } else {
@@ -235,12 +225,10 @@
                 }
                 console.log(expresion)
             }
-
             function clearScreen() {
                 input.innerText = ''
                 expresion = ''
             }
-
             function showResult() {
                 his.innerText = input.innerText + ' ='
                 console.log(expresion)
