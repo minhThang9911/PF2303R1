@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Bài tập] Ứng dụng máy tính</title>
+
 </head>
 
 <body>
@@ -69,11 +70,12 @@
             background-color: #202124;
             padding: 3em;
             color: white;
-            border-radius: 3em;
+            border-radius: 1em;
+            user-select: none;
         }
 
         .advanced-cal .result {
-            border: 1px solid black;
+            border: 1px solid white;
             border-radius: 0.2em;
         }
 
@@ -86,10 +88,12 @@
 
         .advanced-cal #history {
             font-size: 1.2em;
+            height: 1.5em;
         }
 
         .advanced-cal #input {
             font-size: 2em;
+            height: 1.5em;
         }
 
         .advanced-cal .btns {
@@ -101,6 +105,7 @@
         }
 
         .advanced-cal .cal-btn {
+            position: relative;
             width: 5em;
             height: 3em;
             margin: 0.3em;
@@ -110,75 +115,144 @@
             color: white;
         }
 
+
         .advanced-cal .cal-btn:hover {
             opacity: 0.8;
+        }
+
+        .advanced-cal .cal-btn.cal-btn-equal:active,
+        .advanced-cal .cal-btn.cal-btn-number:active,
+        .advanced-cal .cal-btn:active {
+            background-color: aqua;
+        }
+
+        .advanced-cal .cal-btn span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .advanced-cal .cal-btn:active span {
+            font-size: 1.5em;
+            font-weight: bold;
+
         }
 
         .advanced-cal .cal-btn.cal-btn-number {
             background-color: #424548;
         }
+
         .advanced-cal .cal-btn.cal-btn-equal {
             background-color: #aecbfa;
             color: black;
         }
-
     </style>
     <section>
         <p>Yêu cầu mở rộng: Nâng cấp ứng dụng để trở nên cao cấp hơn</p>
-    <div class="advanced-cal">
-        <div class="result">
-            <p id="history">2+2</p>
-            <h3 id="input">1+1</h3>
+        <div class="advanced-cal">
+            <div class="result">
+                <p id="history"></p>
+                <h3 id="input"></h3>
+            </div>
+            <div class="btns">
+                <div class="row">
+                    <div class="cal-btn" onclick="inputValue('rad')"><span>Rad</span></div>
+                    <div class="cal-btn" onclick="inputValue('deg')"><span>Deg</span></div>
+                    <div class="cal-btn" onclick="inputValue('!')"><span>x!</span></div>
+                    <div class="cal-btn" onclick="inputValue('(')"><span>&lbbrk;</span></div>
+                    <div class="cal-btn" onclick="inputValue(')')"><span>&rbbrk;</span></div>
+                    <div class="cal-btn" onclick="inputValue('%')"><span>%</span></div>
+                    <div class="cal-btn" onclick="clearScreen()"><span>CE</span></div>
+                </div>
+                <div class="row">
+                    <div class="cal-btn" onclick="inputValue('Inv(')"><span>Inv</span></div>
+                    <div class="cal-btn" onclick="inputValue('sin(')"><span>sin</span></div>
+                    <div class="cal-btn" onclick="inputValue('In(')"><span>In</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('7')"><span>7</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('8')"><span>8</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('9')"><span>9</span></div>
+                    <div class="cal-btn" onclick="inputValue('/')"><span>÷</span></div>
+                </div>
+                <div class="row">
+                    <div class="cal-btn" onclick="inputValue('π')"><span>π</span></div>
+                    <div class="cal-btn" onclick="inputValue('cos(')"><span>cos</span></div>
+                    <div class="cal-btn" onclick="inputValue('log(')"><span>log</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('4')"><span>4</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('5')"><span>5</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('6')"><span>6</span></div>
+                    <div class="cal-btn" onclick="inputValue('×','*')"><span>×</span></div>
+                </div>
+                <div class="row">
+                    <div class="cal-btn" onclick="inputValue('e')"><span>e</span></div>
+                    <div class="cal-btn" onclick="inputValue('tan(')"><span>tan</span></div>
+                    <div class="cal-btn" onclick="inputValue('√(','sqrt(')"><span>√</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('1')"><span>1</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('2')"><span>2</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('3')"><span>3</span></div>
+                    <div class="cal-btn" onclick="inputValue('−','-')"><span>−</span></div>
+                </div>
+                <div class="row">
+                    <div class="cal-btn" onclick="inputValue('Ans')"><span>Ans</span></div>
+                    <div class="cal-btn" onclick="inputValue('E','e')"><span>EXP</span></div>
+                    <div class="cal-btn" onclick="inputValue('^')"><span>x</span><sup>y</sup></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('0')"><span>0</span></div>
+                    <div class="cal-btn cal-btn-number" onclick="inputValue('.')"><span>.</span></div>
+                    <div class="cal-btn cal-btn-equal" onclick="showResult()"><span>=</span></div>
+                    <div class="cal-btn" onclick="inputValue('+')"><span>+</span></div>
+                </div>
+            </div>
         </div>
-        <div class="btns">
-            <div class="row">
-                <button class="cal-btn">Rad</button>
-                <button class="cal-btn">Deg</button>
-                <button class="cal-btn">x!</button>
-                <button class="cal-btn">&lbbrk;</button>
-                <button class="cal-btn">&rbbrk;</button>
-                <button class="cal-btn">%</button>
-                <button class="cal-btn">CE</button>
-            </div>
-            <div class="row">
-                <button class="cal-btn">Inv</button>
-                <button class="cal-btn">sin</button>
-                <button class="cal-btn">In</button>
-                <button class="cal-btn cal-btn-number">7</button>
-                <button class="cal-btn cal-btn-number">8</button>
-                <button class="cal-btn cal-btn-number">9</button>
-                <button class="cal-btn">÷</button>
-            </div>
-            <div class="row">
-                <button class="cal-btn">π</button>
-                <button class="cal-btn">cos</button>
-                <button class="cal-btn">log</button>
-                <button class="cal-btn cal-btn-number">4</button>
-                <button class="cal-btn cal-btn-number">5</button>
-                <button class="cal-btn cal-btn-number">6</button>
-                <button class="cal-btn">×</button>
-            </div>
-            <div class="row">
-                <button class="cal-btn">e</button>
-                <button class="cal-btn">tan</button>
-                <button class="cal-btn">√</button>
-                <button class="cal-btn cal-btn-number">1</button>
-                <button class="cal-btn cal-btn-number">2</button>
-                <button class="cal-btn cal-btn-number">3</button>
-                <button class="cal-btn">−</button>
-            </div>
-            <div class="row">
-                <button class="cal-btn">Ans</button>
-                <button class="cal-btn">EXP</button>
-                <button class="cal-btn">x<sup>y</sup></button>
-                <button class="cal-btn cal-btn-number">0</button>
-                <button class="cal-btn cal-btn-number">.</button>
-                <button class="cal-btn cal-btn-equal">=</button>
-                <button class="cal-btn">+</button>
-            </div>
-        </div>
-    </div>
-</section>
+
+        <script src="./libs/math.js"></script>
+        <script>
+            let input = document.getElementById('input')
+            let his = document.getElementById('history')
+            let ans = 0
+            let expresion = ''
+            let space = ''
+            let spaceAfter = true
+            function inputValue(val, exp) {
+                if(spaceAfter) {
+                    space = ' '
+                } else {
+                    space = ''
+                    spaceAfter = true
+                }
+                if (val === '.' || val === 'e') {
+                    space = ''
+                    spaceAfter = false
+                } else {
+                    space = ' '                
+                }
+                
+                input.innerText += space + val
+                spaceAfter = true
+                if (typeof exp === "undefined") {
+                    expresion += val
+                } else {
+                    expresion += exp
+                }
+                console.log(expresion)
+            }
+
+            function clearScreen() {
+                input.innerText = ''
+                expresion = ''
+            }
+
+            function showResult() {
+                his.innerText = input.innerText + ' ='
+                console.log(expresion)
+                let convertExpresion = expresion.replaceAll('Ans', ans)
+                if (convertExpresion.split('(').length !== convertExpresion.split(')').length) {
+                    convertExpresion += ')'
+                }
+                ans = math.format(math.evaluate(convertExpresion), 9)
+                input.innerText = ans
+            }
+        </script>
+    </section>
 </body>
 
 </html>
