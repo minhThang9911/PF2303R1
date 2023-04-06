@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tính điểm Đại học khối D</title>
+</head>
+<body>
+    <h1>Tính điểm ĐH khối D</h1>
+    <p>Môn Toán <input type="number" id="toan" size="10"></p>
+    <p>Môn Văn <input type="number" id="van" size="10"></p>
+    <p>Môn Anh <input type="number" id="anh" size="10"></p>
+    <p>Khu vực <select id="khu-vuc">
+        <option value="0.75">KV1</option>
+        <option value="0.5">KV2-NT</option>
+        <option value="0.25">KV2</option>
+        <option value="0">KV3</option>
+    </select></p>
+    <input type="button" value="Tính điểm" onclick="tinhDiem()">
+    <h2 id="ket-qua" style="color: red;"></h2>
+
+    <script>
+        function tinhDiem(){
+            let toan = parseFloat(document.getElementById('toan').value)
+            let van = parseFloat(document.getElementById('van').value)
+            let anh = parseFloat(document.getElementById('anh').value)
+            let diemKV = parseFloat(document.getElementById('khu-vuc').value)
+            let result = 'Vui lòng nhập chữ số'
+            if (!isNaN(toan) && !isNaN(van) && !isNaN(anh) && !isNaN(diemKV)){
+                result = 'Tổng điểm DH khối D của bạn là ' + (toan + van + anh + diemKV)
+            }
+            document.getElementById('ket-qua').innerText = result
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tra cứu giá hoa quả</title>
+</head>
+
+<body>
+    <main>
+        <h1>Giá hoa quả</h1>
+        <p>
+            <input type="text" id="ten-qua" size="10" list="danh-sach-qua">
+            <input type="button" value="Xem giá" onclick="showPrice()">
+            <datalist id="danh-sach-qua">
+                <option value="Ổi"></option>
+                <option value="Dưa Hấu"></option>
+                <option value="Táo"></option>
+                <option value="Xoài"></option>
+                <option value="Cam"></option>
+                <option value="Chôm Chôm"></option>
+                <option value="Măng Cụt"></option>
+            </datalist>
+        </p>
+        <h2 id="result"></h2>
+    </main>
+    <script>
+        function showPrice() {
+            let out = ''
+            let name = document.getElementById('ten-qua').value
+            switch (name) {
+                case 'Ổi':
+                    out = '20000'
+                    break
+                case 'Dưa Hấu':
+                    out = '20000'
+                    break
+                case 'Táo':
+                    out = '30000'
+                    break
+                case 'Xoài':
+                    out = '30000'
+                    break
+                case 'Cam':
+                    out = '40000'
+                    break
+                case 'Chôm Chôm':
+                    out = '40000'
+                    break
+                case 'Măng Cụt':
+                    out = '50000'
+                    break
+            }
+            document.getElementById('result').innerText = out + ' VNĐ/kg'
+        }
+    </script>
+</body>
+
+</html>
