@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Ứng dụng máy tính</title>
+</head>
+
+<body>
+    <p>Tạo một ứng dụng máy tính đơn giản để thực hiện các phép tính đơn giản</p>
+    <h1>Caculator</h1>
+    <p>
+        <input type="number" id="a">
+        <input type="number" id="b">
+    </p>
+    <p>
+        <input type="button" value="Addition (+)" onclick="cal('+')">
+        <input type="button" value="Subtraction (-)" onclick="cal('-')">
+        <input type="button" value="Multiplication (x)" onclick="cal('*')">
+        <input type="button" value="Division (/)" onclick="cal('/')">
+    </p>
+    <p>
+        Result
+        <span id="out"></span>
+    </p>
+    <script>
+        function cal(math) {
+            let a = parseFloat(document.getElementById('a').value)
+            let b = parseFloat(document.getElementById('b').value)
+            let out = document.getElementById('out')
+            let outString = 'Xin nhập chữ số!!'
+            let addingText = ''
+            if (!isNaN(a) && !isNaN(b)) {
+                switch (math) {
+                    case '+':
+                        outString = a + b
+                        addingText = 'Addition : '
+                        break;
+                    case '-':
+                        outString = a - b
+                        addingText = 'Subtraction : '
+                        break;
+                    case '*':
+                        outString = a * b
+                        addingText = 'Multiplication : '
+                        break;
+                    case '/':
+                        if (b !== 0) {
+                            outString = (a / b).toFixed(2)
+                        } else {
+                            outString = 'Không thể chia cho 0'
+                        }
+                        addingText = 'Division : '
+                        break;
+                }
+            }
+            out.innerText = addingText + outString
+        }
+    </script>
+</body>
+
+</html>
