@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Ứng dụng chuyển đổi tiền tệ (JS)</title>
+</head>
+
+<body>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>From Currency</th>
+                    <th>To Currency</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="number" id="input-currency" size="20"></td>
+                    <td>
+                        <select id="from-currency">
+                            <option value=0>VNĐ - VietNam Dong</option>
+                            <option value=1>AUD - AUSTRALIAN DOLLAR</option>
+                            <option value=2>CAD - CANADIAN DOLLAR</option>
+                            <option value=3>CHF - SWISS FRANC</option>
+                            <option value=4>CNY - YUAN RENMINBI</option>
+                            <option value=5>DKK - DANISH KRONE</option>
+                            <option value=6>EUR - EURO</option>
+                            <option value=7>GBP - POUND STERLING</option>
+                            <option value=8>HKD - HONGKONG DOLLAR</option>
+                            <option value=9>INR - INDIAN RUPEE</option>
+                            <option value=10>JPY - YEN</option>
+                            <option value=11>KRW - KOREAN WON</option>
+                            <option value=12>KWD - KUWAITI DINAR</option>
+                            <option value=13>MYR - MALAYSIAN RINGGIT</option>
+                            <option value=14>NOK - NORWEGIAN KRONER</option>
+                            <option value=15>RUB - RUSSIAN RUBLE</option>
+                            <option value=16>SAR - SAUDI RIAL</option>
+                            <option value=17>SEK - SWEDISH KRONA</option>
+                            <option value=18>SGD - SINGAPORE DOLLAR</option>
+                            <option value=19>THB - THAILAND BAHT</option>
+                            <option value=20>USD - US DOLLAR</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="to-currency">
+                            <option value=0>VNĐ - VietNam Dong</option>
+                            <option value=1>AUD - AUSTRALIAN DOLLAR</option>
+                            <option value=2>CAD - CANADIAN DOLLAR</option>
+                            <option value=3>CHF - SWISS FRANC</option>
+                            <option value=4>CNY - YUAN RENMINBI</option>
+                            <option value=5>DKK - DANISH KRONE</option>
+                            <option value=6>EUR - EURO</option>
+                            <option value=7>GBP - POUND STERLING</option>
+                            <option value=8>HKD - HONGKONG DOLLAR</option>
+                            <option value=9>INR - INDIAN RUPEE</option>
+                            <option value=10>JPY - YEN</option>
+                            <option value=11>KRW - KOREAN WON</option>
+                            <option value=12>KWD - KUWAITI DINAR</option>
+                            <option value=13>MYR - MALAYSIAN RINGGIT</option>
+                            <option value=14>NOK - NORWEGIAN KRONER</option>
+                            <option value=15>RUB - RUSSIAN RUBLE</option>
+                            <option value=16>SAR - SAUDI RIAL</option>
+                            <option value=17>SEK - SWEDISH KRONA</option>
+                            <option value=18>SGD - SINGAPORE DOLLAR</option>
+                            <option value=19>THB - THAILAND BAHT</option>
+                            <option value=20>USD - US DOLLAR</option>
+
+                        </select>
+                    </td>
+                    <td><input type="button" value="Convert" onclick="convert()"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 id="result" style="color: red;"></h2>
+    </main>
+    <script>
+        function getChangeRate(index) {
+            switch (index) {
+                case 0: return 1
+                case 1: return 15400.32
+                case 2: return 17107.94
+                case 3: return 25518.18
+                case 4: return 3374.26
+                case 5: return 3371.97
+                case 6: return 25190.24
+                case 7: return 28700.48
+                case 8: return 2940.68
+                case 9: return 285.79
+                case 10: return 174.92
+                case 11: return 17.08
+                case 12: return 76241.39
+                case 13: return 5274.67
+                case 14: return 2198.21
+                case 15: return 274.82
+                case 16: return 6233.37
+                case 17: return 2202.67
+                case 18: return 17352.28
+                case 19: return 674.95
+                case 20: return 23280
+            }
+        }
+
+        function convert() {
+            const amount = parseFloat(document.getElementById('input-currency').value)
+            const fromCurrency = parseInt(document.getElementById('from-currency').value)
+            const toCurrency = parseInt(document.getElementById('to-currency').value)
+            const unit = document.getElementById('to-currency').options[toCurrency].innerText            
+            let out = ''           
+            if (!isNaN(amount)) {
+                out = (amount * getChangeRate(fromCurrency) / getChangeRate(toCurrency)).toFixed(2) + " " + unit                
+            } else {
+                out = 'Số tiền xin nhập chữ số!!'
+            }
+            document.getElementById('result').innerText = out
+        }
+    </script>
+</body>
+
+</html>

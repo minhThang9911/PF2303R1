@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tính chỉ số cân nặng của cơ thể (JS)</title>
+</head>
+
+<body>
+    <script>
+        let weight = parseFloat(prompt('Cân nặng ?', '0'))
+        let height = parseFloat(prompt('Chiều cao ?', '0'))
+        let out = 'Xin nhập chữ số và chiều cao <> 0'
+        if (!isNaN(weight) && !isNaN(height) && height != 0) {
+            out = 'Béo phì độ III'
+            let bmi = (weight / (height * height)).toFixed(2)
+            if (bmi < 40) out = 'Béo phì độ II'
+            if (bmi < 35) out = 'Béo phì độ I'
+            if (bmi < 30) out = 'Thừa cân'
+            if (bmi < 25) out = 'Bình thường'
+            if (bmi < 18.5) out = 'Gầy độ I'
+            if (bmi < 17) out = 'Gầy độ II'
+            if (bmi < 16) out = 'Gầy độ III'
+            out = 'Bạn có chiều cao ' + height + 'm, cân nặng ' + weight + 'kg, chỉ số BMI của bạn là: ' + bmi + ' phân loại là: ' + out
+        }
+        alert(out)
+    </script>
+</body>
+
+</html>

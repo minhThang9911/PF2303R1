@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo form lấy survey khách hàng</title>
+
+    <style>
+        .rate-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .rate-table tr:nth-of-type(1) {
+            background-color: #e6e6e6;
+        }
+
+        .rate-table tr:nth-of-type(3) {
+            background-color: #f5f5f5;
+        }
+
+        .rate-table td:not(.rate-table td:first-child) {
+            width: 15%;
+        }
+
+        .rate-table td {
+            border: 1px solid #cccccc;
+            height: 30px;
+            padding: 6px;
+        }
+
+        select {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <form action="#" method="post">
+            <h2>Market Research Survey</h2>
+            <p>Please take a few moments to complete this satisfaction survey.</p>
+            <hr size="1">
+            <div class="">
+                <h4><label for="age">What is your age range?</label></h4>
+                <p><select name="age" id="age">
+                        <option value="18-24">18-24</option>
+                        <option value="25-34">25-34</option>
+                        <option value="35-50">35-50</option>
+                        <option value="50+">50+</option>
+                    </select></p>
+            </div>
+            <div class="">
+                <h4><label for="income">What is your yearly income range?</label></h4>
+                <p><select name="income" id="income">
+                        <option value="$0 - $25,000">$0 - $25,000</option>
+                        <option value="$25,001 - $50,000">$25,001 - $50,000</option>
+                        <option value="$50,001 - $100,000">$50,001 - $100,000</option>
+                        <option value="$100,000+">$100,000+</option>
+                    </select></p>
+            </div>
+            <div class="">
+                <h4>Gender Identity</h4>
+                <p><label><input type="radio" name="gender" value="0"> Male</label></p>
+                <p><label><input type="radio" name="gender" value="1"> Female</label></p>
+                <p><label><input type="radio" name="gender" value="2"> Nonbinary</label></p>
+                <p><label><input type="radio" name="gender" value="3"> Other</label></p>
+                <p><input type="text" name="genderOther"></p>
+            </div>
+            <div class="">
+                <h4>Which of the following products have your purchased in the last 2 months. Please check all that
+                        apply.</h4>
+                <p><label><input type="checkbox" name="productPurchased" value="product1">Product 1</label></p>
+                <p><label><input type="checkbox" name="productPurchased" value="product2">Product 2</label></p>
+                <p><label><input type="checkbox" name="productPurchased" value="product3">Product 3</label></p>
+            </div>
+            <div class="">
+                <h4>How often would you use our new product?</h4>
+                <p><label><input type="radio" name="oftenUse" value="0"> Daily</label></p>
+                <p><label><input type="radio" name="oftenUse" value="1"> Weekly</label></p>
+                <p><label><input type="radio" name="oftenUse" value="2"> Monthly</label></p>
+            </div>
+            <div class="">
+                <h4>What would you pay for the new product?</h4>
+                <table>
+                    <tr>
+                        <td>$</td>
+                        <td><input type="text" name="payDollars" size="8"></td>
+                        <td>.</td>
+                        <td><input type="text" name="payCents" size="4"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Dollars</td>
+                        <td></td>
+                        <td>Cents</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="">
+                <h4>What features would you like to see in the new product.</h4>
+                <textarea name="newProductFeatures" cols="110" rows="5"></textarea>
+            </div>
+            <div class="">
+                <p>Please rate your level of agreement with the following statements.</p>
+                <table class="rate-table">
+                    <tr align="center">
+                        <td></td>
+                        <td>Strongly Disagree</td>
+                        <td>Disagree</td>
+                        <td>Agree</td>
+                        <td>Strongly Agree</td>
+                    </tr>
+                    <tr align="center">
+                        <td align="left"><b>Our products are priced fairly.</b></td>
+                        <td><label><input type="radio" name="question1" value="1"><br>1</label></td>
+                        <td><label><input type="radio" name="question1" value="2"><br>2</label></td>
+                        <td><label><input type="radio" name="question1" value="3"><br>3</label></td>
+                        <td><label><input type="radio" name="question1" value="4"><br>4</label></td>
+                    </tr>
+                    <tr align="center">
+                        <td align="left"><b>Our products are high quality.</b></td>
+                        <td><label><input type="radio" name="question2" value="1"><br>1</label></td>
+                        <td><label><input type="radio" name="question2" value="2"><br>2</label></td>
+                        <td><label><input type="radio" name="question2" value="3"><br>3</label></td>
+                        <td><label><input type="radio" name="question2" value="4"><br>4</label></td>
+                    </tr>
+                    <tr align="center">
+                        <td align="left"><b>You would recommend our product to a friend or coworker.</b></td>
+                        <td><label><input type="radio" name="question3" value="1"><br>1</label></td>
+                        <td><label><input type="radio" name="question3" value="2"><br>2</label></td>
+                        <td><label><input type="radio" name="question3" value="3"><br>3</label></td>
+                        <td><label><input type="radio" name="question3" value="4"><br>4</label></td>
+                    </tr>
+                </table>
+            </div>
+            <p><input type="submit" value="Submit"></p>
+        </form>
+    </main>
+</body>
+
+</html>
