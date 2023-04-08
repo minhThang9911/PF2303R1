@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Hiển thị các số nguyên tố đầu tiên</title>
+</head>
+
+<body>
+    <h1>[Bài tập] Hiển thị các số nguyên tố đầu tiên</h1>
+    <p>Số lượng số nguyên tố cần in ra: <input type="number" id="require"></p>
+    <p><input type="button" value="Tính" onclick="calculate()" style="width: 20%;"></p>
+    <h2 id="out" style="color: red;"></h2>
+
+    <script>
+        function isPrime(number) {
+            let start = 2;
+            const limit = Math.sqrt(number);
+            while (start <= limit) {
+                if (number % start++ < 1) return false;
+            }
+            return number > 1;
+        }
+
+        function calculate() {
+            let require = parseInt(document.getElementById('require').value)
+            let out = document.getElementById('out')
+            if (!isNaN(require) && require > 0) {
+                let count = 1; i = 2; html = '1'
+                while (count < require) {
+                    if(isPrime(i)) {
+                        html +=', ' +i
+                        count ++
+                    }
+                    i++
+                }
+                out.innerText =html
+            } else out.innerText = 'Số lượng số nguyên tố là số nguyên dương'
+        }
+    </script>
+</body>
+
+</html>

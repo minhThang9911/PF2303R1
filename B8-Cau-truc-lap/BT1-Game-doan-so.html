@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Game đoán số</title>
+</head>
+
+<body>
+    <input type="button" value="Chơi game đoán số" onclick="play()">
+    <script>
+        function play() {
+            const max = parseInt(prompt('Nhập số lớn nhất ?'))
+            if (!isNaN(max)) {
+                const rand = Math.floor(Math.random() * max + 1)
+                let playTime = 0
+                let answer = 0
+                console.log(rand)
+                do {
+                    answer = prompt('Nhập số dự đoán: ')
+                } while (++playTime < 3 && answer != rand);
+                if (answer == rand)
+                    alert('Chúc mừng bạn đoán đúng, Số ngẫu nhiên: ' + rand)
+                else
+                    alert('Chúc may mắn lần sau, Số ngẫu nhiên: ' + rand)
+            } else alert('Vui lòng nhập chữ số nguyên!!')
+        }
+    </script>
+</body>
+
+</html>

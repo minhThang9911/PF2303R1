@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Tính tổng các số trong khoảng</title>
+</head>
+<body>
+    <h1>[Bài tập] Tính tổng các số trong khoảng</h1>
+    <p>Nhập số nguyên a: <input type="number" id="a"></p>
+    <p>Nhập số nguyên b: <input type="number" id="b"></p>
+    <p><input type="button" value="Tính" onclick="calculate()" style="width: 50%;"></p>
+    <h2 id="out" style="color: red;"></h2>
+    <script>
+        function calculate(){
+            let a = parseInt(document.getElementById('a').value)
+            let b = parseInt(document.getElementById('b').value)
+            let out = document.getElementById('out')
+            if (!isNaN(a) && !isNaN(b)) {
+                let min = 0
+                let max = 0
+                let total = 0
+                if (a >= b) {
+                    min = b
+                    max = a                    
+                } else {
+                    min = a
+                    max = b 
+                }
+                for (let i = min; i <= max; i++){
+                    total += i
+                }
+                out.innerText = total
+            } else out.innerText = 'Xin nhập 2 số nguyên!!'
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Số đảo ngược</title>
+</head>
+
+<body>
+    <h1>[Bài tập] Số đảo ngược</h1>
+    <p>Nhập vào 1 số:</p>
+    <p><input type="number" size="20" id="num"></p>
+    <p><input type="button" value="Số đảo ngược" onclick="showResult()"></p>
+    <h2>Số đảo ngược là: <span id="result" style="color: red;"></span></h2>
+    <script>
+        function showResult() {
+            let num = parseInt(document.getElementById('num').value)
+            let result = document.getElementById('result')
+            result.innerText = ''
+            if (!isNaN(num)) {
+                while ((num / 10) > 0) {
+                    result.innerText = result.innerText + (num % 10)
+                    num = Math.floor(num / 10)
+                }
+            } else result.innerText = 'Xin nhập vào 1 số nguyên bất kỳ!!'
+        }
+    </script>
+</body>
+
+</html>

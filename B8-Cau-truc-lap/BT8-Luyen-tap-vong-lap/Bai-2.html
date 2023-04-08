@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Luyện tập vòng lặp</title>
+</head>
+
+<body>
+    <h1>Bài 2: Sử dụng hàm prompt() để lấy thông tin nhiệt độ hiện tại được nhập bởi người truy cập. Nếu nhiệt độ nhập
+        vào trên 100, yêu cầu người dùng giảm nhiệt độ. Nếu nhiệt độ dưới 20, yêu cầu người dùng tăng nhiệt độ.</h1>
+
+    <script>
+        let nhietDo = 0
+        do {
+            nhietDo = prompt('Nhập nhiệt độ:')
+            if (nhietDo < 20) alert('Cần tăng nhiệt độ')
+            if (nhietDo > 100) alert('Cần giảm nhiệt độ')
+        } while (nhietDo < 20 || nhietDo > 100 || isNaN(nhietDo));
+    </script>
+</body>
+
+</html>

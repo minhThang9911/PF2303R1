@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Thực hành] Sử dụng vòng lặp for</title>
+</head>
+
+<body> 
+    <script>
+        let num = parseFloat(prompt("Enter your number: "))
+        if (!isNaN(num)){
+            let total = 0;            
+            for (let i = 1; i <= num; ++i) {
+                total += i;
+            }
+            alert(total);
+        } else alert('Vui lòng nhập số')
+    </script>
+</body>
+
+</html>

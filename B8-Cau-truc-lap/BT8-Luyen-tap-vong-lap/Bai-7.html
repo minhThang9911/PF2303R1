@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Luyện tập vòng lặp</title>
+</head>
+
+<body>
+    <h1>Bài 7: Hãy viết một chương trình in ra các số từ 1 đến 100. Nhưng nếu số chia hết cho 3 thì in ra “Fizz”, 5 thì in ra “Buzz” thay vì in ra số đó. Và nếu số đó chia hết cho cả 3 và 5 thì in ra chữ “FizzBuzz”.</h1>
+    <h2 id="out" style="color: red;"></h2>
+    <script>      
+        let out = document.getElementById('out')
+        out.innerText = '1'
+        for(let i = 2; i <=100; i++){
+            let tmp = i
+            if(i%3 == 0) tmp = 'Fizz'
+            if(i%5 == 0) tmp = 'Buzz'
+            if(i%3 == 0 && i%5 == 0) tmp = 'FizzBuzz'
+            out.innerText += ', ' + tmp
+        }
+    </script>
+</body>
+
+</html>

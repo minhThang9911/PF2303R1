@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] In dãy Fibonacci</title>
+</head>
+
+<body>
+    <main>
+        <h1>[Bài tập] In dãy Fibonacci</h1>
+        <p>Nhập vào 1 số n nguyên dương:
+            <input type="number" id="num" size="10">
+            <input type="button" value="Tính" onclick="calculate()">
+        </p>
+        <h3 id="result" style="color: red;"></h3>
+    </main>
+
+    <script>
+        function calculate() {
+            let result = document.getElementById('result')
+            let num = parseInt(document.getElementById('num').value)
+            result.innerText =''
+            if (!isNaN(num) && num > 0) {
+                let n = 3
+                let j = 1
+                let jj = 1
+                if (num >= 1) {
+                    result.innerText = 1
+                }
+                if (num >= 2) {
+                    result.innerText +=', ' + 1
+                }
+                while (n <= num) {
+                    let tmp = j                    
+                    j = j + jj
+                    jj = tmp
+                    result.innerText += ', ' + j                    
+                    ++n
+                }
+            } else result.innerText = 'Vui lòng nhập số nguyên dương'
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Thực hành] Sử dụng vòng lặp while</title>
+</head>
+
+<body>
+    <script>
+        let num = 0
+        let total = 0;
+        while (num != -1) {
+            num = parseFloat(prompt("Enter a number: "))
+            if (!isNaN(num)) {
+                total += num
+                alert('Số nhập: ' + num + ' .Tổng: ' + total)
+            } else alert('Vui lòng nhập số!, nhập -1 để thoát')
+        } 
+    </script>
+</body>
+
+</html>
