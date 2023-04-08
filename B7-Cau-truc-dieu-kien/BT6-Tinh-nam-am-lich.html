@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Tính năm âm lịch từ năm dương lịch</title>
+</head>
+
+<body>
+    <main>
+        <h1>[*Bài tập] Tính năm âm lịch từ năm dương lịch</h1>
+        <p>Năm dương lịch: <input type="number" id="nam-duong-lich" size="10">
+            <input type="button" value="Tính năm âm lịch" onclick="tinhNamAmLich()">
+        </p>
+        <h2 id="nam-am-lich" style="color: red;"></h2>
+    </main>
+    <script>
+        function timCan(nam) {
+            switch (nam % 10) {
+                case 0: return 'Canh'
+                case 1: return 'Tân'
+                case 2: return 'Nhâm'
+                case 3: return 'Quý'
+                case 4: return 'Giáp'
+                case 5: return 'Ất'
+                case 6: return 'Bính'
+                case 7: return 'Đinh'
+                case 8: return 'Mậu'
+                case 9: return 'Kỷ'
+            }
+        }
+        function timChi(nam) {
+            switch (nam % 12) {
+                case 0: return 'Thân'
+                case 1: return 'Dậu'
+                case 2: return 'Tuất'
+                case 3: return 'Hợi'
+                case 4: return 'Tý'
+                case 5: return 'Sửu'
+                case 6: return 'Dần'
+                case 7: return 'Mẹo'
+                case 8: return 'Thìn'
+                case 9: return 'Tỵ'
+                case 10: return 'Ngọ'
+                case 11: return 'Mùi'
+            }
+        }
+
+        function tinhNamAmLich() {
+            let nam = parseInt(document.getElementById('nam-duong-lich').value)
+            let namAmLich = document.getElementById('nam-am-lich')
+            if (!isNaN(nam)) namAmLich.innerText = timCan(nam) + ' ' + timChi(nam)
+            else namAmLich.innerText = 'Xin nhập chữ số!!'
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Ứng dụng máy tính bỏ túi</title>
+    <style>
+        .calculator {
+            width: 29em;
+            border: 1px solid black;
+        }
+
+        #out-line {
+            border: 1px solid #ccc;
+            margin: 0.2em;
+            font-size: 3em;
+            overflow-x: scroll;
+        }
+
+        #out-line #input-screen {
+            text-align: end;
+            margin: 0;
+            padding: 0.5em;
+            height: 1em;
+        }
+
+        .input .row {
+            display: flex;
+        }
+
+        .input .row button {
+            flex: 0 0 auto;
+            width: 2em;
+            height: 2em;
+            margin: 0.2em;
+            padding: 0;
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .input .row .input-num {
+            background-color: white;
+        }
+
+        .input .row .input-operation {
+            background-color: #54728C;
+            color: white;
+        }
+
+        .input .row .input-clear {
+            background-color: #D9665B;
+            color: white;
+        }
+
+        .input .row .input-equal {
+            background-color: #049DBF;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="calculator">
+            <div id="out-line">
+                <p id="input-screen"></p>
+            </div>
+
+            <div class="input">
+                <div class="row">
+                    <button class="input-num" onclick="input(this)">1</button>
+                    <button class="input-num" onclick="input(this)">2</button>
+                    <button class="input-num" onclick="input(this)">3</button>
+                    <button class="input-operation" onclick="input(this)">+</button>
+                </div>
+                <div class="row">
+                    <button class="input-num" onclick="input(this)">4</button>
+                    <button class="input-num" onclick="input(this)">5</button>
+                    <button class="input-num" onclick="input(this)">6</button>
+                    <button class="input-operation" onclick="input(this)">-</button>
+                </div>
+                <div class="row">
+                    <button class="input-num" onclick="input(this)">7</button>
+                    <button class="input-num" onclick="input(this)">8</button>
+                    <button class="input-num" onclick="input(this)">9</button>
+                    <button class="input-operation" onclick="input(this)">×</button>
+                </div>
+                <div class="row">
+                    <button class="input-clear" onclick="clearScreen()">C</button>
+                    <button class="input-num" onclick="input(this)">0</button>
+                    <button class="input-equal" onclick="getResult()">=</button>
+                    <button class="input-operation" onclick="input(this)">/</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let screen = document.getElementById('input-screen')
+        let outLine = document.getElementById('out-line')
+        function input(val) {
+            screen.innerText += val.innerText
+            outLine.scrollLeft = outLine.scrollWidth;
+        }
+        function getResult() {
+            let expresion = screen.innerText
+            console.log(expresion)
+            let result = 0
+            if (expresion[0] === '×' || expresion[0] === '/') {
+                expresion = expresion.substring(1)
+            }
+            let s = expresion.match(/[+\-\×\/]*(\.\d+|\d+(\.\d+)?)/g) || []
+            s.forEach(e => {
+                switch (e[0]) {
+                    case '+':
+                        result += parseInt(e.substring(1))
+                        break
+                    case '-':
+                        result -= parseInt(e.substring(1))
+                        break
+                    case '×':
+                        result *= parseInt(e.substring(1))
+                        break
+                    case '/':
+                        result /= parseInt(e.substring(1))
+                        break
+                    default: result += parseInt(e)
+                }
+            });
+            screen.innerText = parseFloat(result.toFixed(9))
+        }
+        function clearScreen() {
+            screen.innerText = ''
+        }
+    </script>
+</body>
+
+</html>
