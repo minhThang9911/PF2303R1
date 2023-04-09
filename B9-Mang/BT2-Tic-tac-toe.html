@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Tic tac toe</title>
+</head>
+
+<body>
+    <h3>Caro Game Simple</h3>
+    <p id="carogame"></p>
+    <input type="button" value="Player X" onclick="changeValue('X')">
+    <input type="button" value="Player O" onclick="changeValue('O')">
+    <input type="button" value="New Game" onclick="drawBoard()">
+    <h2 id="out" style="color:red"></h2>
+    <script>
+        let b = document.getElementById("carogame");
+        let out = document.getElementById("out");
+        let board = [];
+        let data = "";
+        let boardSize = 20
+
+        function drawBoard() {
+            board = [];
+            data = "";
+            for (let i = 0; i < boardSize; i++) {
+                board[i] = new Array(boardSize)
+                for (let j = 0; j < boardSize; j++) {
+                    board[i][j] = '.'
+                }
+            }
+            for (let i = 0; i < boardSize; i++) {
+                data += "<br/>";
+                for (let j = 0; j < boardSize; j++) {
+                    data += board[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+            }
+            b.innerHTML = data;
+        }
+
+        function checkWinner(s) {
+            for (let i = 1; i < (boardSize - 1); i++) {
+                for (let j = 1; j < (boardSize - 1); j++) {
+                    if (
+                        board[i][j] == s && (
+                            (board[i - 1][j] == s && board[i + 1][j] == s)
+                            || (board[i][j - 1] == s && board[i][j + 1] == s)
+                            || (board[i - 1][j - 1] == s && board[i + 1][j + 1] == s)
+                            || (board[i + 1][j - 1] == s && board[i - 1][j + 1] == s)
+                        )
+                    ) return true
+                }
+            }
+            return false
+        }
+
+        function changeValue(s) {
+            let positionX = prompt("X: ");
+            let positionY = prompt("Y: ");
+            data = "";
+            board[positionY - 1][positionX - 1] = s;
+            for (let i = 0; i < boardSize; i++) {
+                data += "<br/>";
+                for (let j = 0; j < boardSize; j++) {
+                    data += board[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+            }
+            if (checkWinner(s)) {
+                let msg = 'Player ' + s + ' is the Winner'
+                alert(msg)
+                out.innerHTML = msg
+            }
+            b.innerHTML = data;
+        }
+
+        drawBoard()
+    </script>
+</body>
+
+</html>

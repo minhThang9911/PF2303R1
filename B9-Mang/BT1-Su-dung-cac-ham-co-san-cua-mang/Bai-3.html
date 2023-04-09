@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Sử dụng các hàm có sẵn của mảng</title>
+</head>
+
+<body>
+    <script>
+        function isUpperCase(s) {
+            return s.toUpperCase() === s
+        }
+        const str = prompt('Nhập vào một chuỗi: ')     
+        document.write('Chuỗi số đã nhập: ' + str)
+        const result = [];
+        for (let char of str) {            
+            if(isUpperCase(char)){
+                result.push(char.toLowerCase())
+            } else {
+                result.push(char.toUpperCase())
+            }
+        }
+        document.write('<br/>')
+        document.write('Chuỗi số đã xử lý: ' + result.join(''))
+        alert('Chuỗi số đã xử lý: ' + result.join(''));
+    </script>
+</body>
+
+</html>

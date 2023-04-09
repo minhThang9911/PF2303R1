@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Ứng dụng vui Faking Textarea on Typing</title>
+</head>
+
+<body>
+    <main style="text-align: center;">
+        <h1>Type Anything Slowly</h1>
+        <textarea id="input" cols="100" rows="10" onkeydown="setTimeout(writeText, 1)" style="font-size: 25px;"></textarea>
+    </main>
+    <script>
+        let input = document.getElementById('input')
+        let msg = 'Tôi là một thằng ngốc ! '
+        let currentChar = 0
+        let currentTyping = ''
+        function writeText() {
+            if (currentChar > msg.length - 1) currentChar = 0
+            currentTyping += msg[currentChar]
+            currentChar++
+            input.value = currentTyping
+        }
+    </script>
+</body>
+
+</html>
