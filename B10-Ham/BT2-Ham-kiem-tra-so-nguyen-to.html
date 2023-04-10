@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Hàm kiểm tra số nguyên tố</title>
+</head>
+
+<body>
+    <h1>[Bài tập] Hàm kiểm tra số nguyên tố: tìm tất cả các số nguyên tố nhỏ hơn 10000.</h1>
+    <h2 id="out" style="color: red;"></h2>
+
+    <script>
+        function isPrime(number) {
+            let start = 2;
+            const limit = Math.sqrt(number);
+            while (start <= limit) {
+                if (number % start++ < 1) return false;
+            }
+            return number > 1;
+        }
+
+        (function calculate() {
+            let max = 10000
+            let out = document.getElementById('out')
+            let i = 2; html = '1'
+            while (i < max) {
+                if (isPrime(i)) {
+                    html += ', ' + i                  
+                }
+                i++
+            }
+            out.innerText = html
+        })()
+        
+    </script>
+</body>
+
+</html>

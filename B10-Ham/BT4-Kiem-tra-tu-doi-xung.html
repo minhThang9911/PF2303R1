@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Kiểm tra từ đối xứng</title>
+</head>
+
+<body>
+    <h1>Xây dựng chương trình sử dụng đệ quy để kiểm tra một từ có phải là từ đối xứng không</h1>
+    <p>Nhập từ cần kiểm tra: <input type="text" id="input" size="20">
+        <input type="button" value="Kiểm tra" onclick="checkWord()">
+    </p>
+
+    <h2 id="output" style="color:red"></h2>
+    <script>
+        function isPalindrome(s, i) {
+            return (i = i || 0) < 0 || i >= s.length / 2 || s[i] == s[s.length - 1 - i] && isPalindrome(s, ++i);
+        }
+        function checkWord() {
+            let input = document.getElementById('input').value
+            document.getElementById('output').innerText = 'isPalindrome: ' + isPalindrome(input)
+        }
+    </script>
+</body>
+
+</html>

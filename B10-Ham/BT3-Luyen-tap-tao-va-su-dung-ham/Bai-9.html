@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Luyện tập tạo và sử dụng hàm</title>
+</head>
+
+<body>
+    <h1>Bài 9: Viết hàm truyền vào mảng số nguyên bất kỳ, sau đó đảo ngược mảng số nguyên đó.</h1>
+    <h2 id="out" style="color:red"></h2>
+    <script>
+        function reOderArray(arr) {
+            if (arr.length > 0) {
+                for (let i = 0; i < (arr.length / 2); i++) {
+                    let tmp = arr[i]
+                    arr[i] = arr[arr.length - 1 - i]
+                    arr[arr.length - 1 - i] = tmp
+                }
+            }
+            return arr
+        }
+        let arr = [5, 8, 6, 5, 8, 2, 1, -5, -7, 2]
+        let result = reOderArray(arr.slice()).join()
+        document.getElementById('out').innerHTML = 'Input arr: ' + arr + '<br/>Output arr: ' + result
+    </script>
+</body>
+</html>

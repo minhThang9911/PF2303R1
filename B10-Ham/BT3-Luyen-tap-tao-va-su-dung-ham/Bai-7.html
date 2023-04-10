@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Luyện tập tạo và sử dụng hàm</title>
+</head>
+
+<body>
+    <h1>Bài 7: Viết hàm nhận vào 3 số nguyên bất kỳ, trả về số nguyên có giá trị nhỏ nhất.</h1>
+    <h2 id="out" style="color:red"></h2>
+    <script>
+        function getMin(a, b, c) {
+            let min = a
+            if (min > b) min = b
+            if (min > c) min = c
+            return min
+        }
+        let a = prompt('Nhập số thứ 1: ')
+        let b = prompt('Nhập số thứ 2: ')
+        let c = prompt('Nhập số thứ 3: ')
+        let result = getMin(a, b, c) + ' là số nhỏ nhất trong 3 số ' + a + ' - ' + b + ' - ' + c
+        document.getElementById('out').innerText = result
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Luyện tập tạo và sử dụng hàm</title>
+</head>
+
+<body>
+    <h1>Bài 3: Viết hàm tính bình phương của một số bất kỳ được đưa vào. Gọi hàm vừa xây dựng được.</h1>
+    <h2 id="out" style="color:red"></h2>
+    <script>
+        function getSquare(s) {
+            return s * s
+        }
+        let num = prompt('Nhập số bất kỳ')
+        let result = ''
+        if (!isNaN(num)) {            
+            result = 'Số ' + num + ' có bình phương là: ' + getSquare(num)
+        } else result = 'Xin nhập số nguyên'
+        document.getElementById('out').innerText = result
+    </script>
+</body>
+
+</html>

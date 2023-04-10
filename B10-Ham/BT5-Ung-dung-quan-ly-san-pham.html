@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Ứng dụng quản lý sản phẩm sử dụng hàm</title>
+    <style>
+        main {
+            width: 90%;
+            margin: auto;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px
+        }
+
+        .add-product {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f2f2f2;
+            padding: 48px 16px;
+            border-radius: 5px;
+        }
+
+        .add-product #input-new-product {
+            flex-grow: 1;
+            font-size: 18px;
+        }
+
+        .btn {
+            background-color: #50af50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 6px;
+            display: block;
+        }
+
+        .btn.btn-save {
+            display: none;
+            background-color: rgb(218, 131, 0);
+        }
+
+        .btn:hover {
+            opacity: 80%;
+        }
+
+        .btn:active {
+            background-color: #387a38;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-size: 25px;
+        }
+
+        .table-header #product-count {
+            color: red;
+        }
+
+        #product-table .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+
+        }
+
+        #product-table .row:nth-child(2n) {
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        .row .product-name {
+            flex-grow: 1;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+        }
+
+        .row .product-name[disabled] {
+            border: none;
+            color: #000;
+            background-color: transparent;
+        }
+
+        .row .product-name[contenteditable="true"] {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>[*Bài tập] Ứng dụng quản lý sản phẩm sử dụng hàm</h1>
+    </header>
+    <main>
+        <h2>Add New Product</h2>
+        <div class="add-product">
+            <input type="text" id="input-new-product">
+            <input type="button" class="btn" value="Add" onclick="addProduct()">
+        </div>
+        <h2>Display All Product</h2>
+        <div class="all-products">
+            <div class="table-header">
+                <h3>Product Name</h3>
+                <h3 id="product-count">9 Producr</h3>
+            </div>
+            <div id="product-table">
+
+            </div>
+        </div>
+    </main>
+    <script>
+        function saveToStorage(arr) {
+            localStorage.setItem('product-list', JSON.stringify(arr));
+        }
+
+        function loadFromStorage() {
+            return JSON.parse(localStorage.getItem('product-list'))
+        }
+        let defaultArr = ['Sony Xperia', 'Samsung Galaxy', 'Nokia 6', 'Xiaomi Redmi Note 4', 'Apple iPhone 6S', 'Xiaomi Mi 5s Plus', 'Apple iPhone 8 Plus', 'Fujitsu F-04E', 'Oppo A71']
+        let arrProduct = loadFromStorage() || defaultArr
+        let table = document.getElementById('product-table')
+        let input = document.getElementById('input-new-product')
+        let count = document.getElementById('product-count')
+        function l(s) {
+            console.log(s)
+        }
+
+        function updateCount() {
+            count.innerText = arrProduct.length + ' products'
+        }
+
+        function getIndexOfRow(child) {
+            return [...table.children].indexOf(child.parentElement)
+        }
+
+        function renderOneRow(index) {
+            let row = document.createElement('div')
+            row.className = 'row'
+            row.setAttribute('data', index)
+            row.innerHTML = `
+                    <input type="text" class="product-name" disabled value="${arrProduct[index]}" onfocus="this.select()">                     
+                    <input type="button" class="btn btn-edit" value="Edit" onclick="editProduct(getIndexOfRow(this))">
+                    <input type="button" class="btn btn-save" value="Save" onclick="saveProduct(getIndexOfRow(this))">
+                    <input type="button" class="btn btn-delete" value="Delete" onclick="deleteProduct(getIndexOfRow(this))">
+                    `
+            table.appendChild(row)
+        }
+        function render() {
+            if (arrProduct.length > 0) {
+                for (index in arrProduct) {
+                    renderOneRow(index)
+                }
+            }
+            updateCount()
+        }
+        function addProduct() {
+            arrProduct.push(input.value)
+            renderOneRow(arrProduct.length - 1)
+            input.value = ''
+            updateCount()
+            saveToStorage(arrProduct)
+            l(arrProduct)
+        }
+
+        function deleteProduct(index) {
+            arrProduct.splice(index, 1)
+            table.removeChild(table.children[index])
+            updateCount()
+            saveToStorage(arrProduct)
+            l(arrProduct)
+        }
+
+        function editProduct(index) {
+            let row = table.querySelector(`div.row[data="${index}"]`)
+            row.querySelector('.btn-edit').style.display = 'none'
+            row.querySelector('.btn-save').style.display = 'block'
+            let productName = row.querySelector('.product-name')
+            productName.removeAttribute('disabled')
+            productName.focus()
+
+            l(arrProduct)
+        }
+
+        function saveProduct(index) {
+            let row = table.querySelector(`div.row[data="${index}"]`)
+            row.querySelector('.btn-edit').style.display = 'block'
+            row.querySelector('.btn-save').style.display = 'none'
+            let productName = row.querySelector('.product-name')
+            productName.setAttribute('disabled', '')
+            arrProduct[index] = productName.value
+            saveToStorage(arrProduct)
+            l(arrProduct)
+        }
+        render()
+    </script>
+</body>
+
+</html>
