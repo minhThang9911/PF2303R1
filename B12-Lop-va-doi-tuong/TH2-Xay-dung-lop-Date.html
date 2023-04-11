@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Thực hành] Xây dựng lớp Date</title>
+</head>
+
+<body>
+    <script>
+        class MyDate {
+            constructor(day, month, year) {
+                this.day = day;
+                this.month = month;
+                this.year = year;
+            }
+            getDay() {
+                return this.day;
+            }
+            getMonth() {
+                return this.month;
+            }
+            getYear() {
+                return this.year;
+            }
+            setDay(day) {
+                this.day = day;
+            }
+            setMonth(month) {
+                this.month = month;
+            }
+            setYear(year) {
+                this.year = year;
+            }
+            setDate(day, month, year) {
+                this.day = day;
+                this.month = month;
+                this.year = year;
+            }
+            toString() {
+                return this.day.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+                    + '/'
+                    + this.month.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+                    + '/'
+                    + this.year.toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false })
+            }
+        }
+        let date = new MyDate(7, 7, 2017);
+        let day = date.getDay();
+        let month = date.getMonth();
+        let year = date.getYear();
+        alert(day + "/" + month + "/" + year);
+        date.setDay(11);
+        date.setMonth(4);
+        date.setYear(2023);
+        alert(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
+        date.setDate(1,5,2025)
+        alert(date.toString())
+    </script>
+</body>
+
+</html>
