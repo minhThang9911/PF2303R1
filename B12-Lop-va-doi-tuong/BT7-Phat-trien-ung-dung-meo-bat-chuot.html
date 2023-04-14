@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Phát triển ứng dụng mô phỏng lại quá trình mèo bắt chuột và ăn chuột</title>
+</head>
+
+<body>
+    <script>
+        class Rat {
+            constructor(name, weight, speed, life) {
+                this.name = name
+                this.weight = weight
+                this.speed = speed
+                this.life = life
+            }
+            sound() {
+                console.log('chít chít')
+            }
+        }
+        class Cat {
+            catchedRat = null
+            constructor(name, weight, maxSpeed) {
+                this.name = name
+                this.weight = weight
+                this.maxSpeed = maxSpeed
+            }
+            sound() {
+                console.log('meo meo')
+            }
+            catchRat(rat) {
+                if (rat.speed < this.maxSpeed) {
+                    this.catchedRat = rat
+                    console.log('Catched one rat !!!!')
+                } else console.log('Catch failed !!!!')
+            }
+            eatRat() {
+                if (this.catchedRat && this.catchedRat.life) {
+                    console.log('Rat eated !!!!')
+                    this.weight += this.catchedRat.weight
+                    console.log('Cat weight gain to ' + this.weight)
+                } else console.log('No life rat to eated !!!!')
+            }
+        }
+        let ratA = new Rat('aaaaa', 11, 10, false)
+        let ratB = new Rat('bbbbb', 22, 20, true)
+        let ratC = new Rat('ccccc', 33, 30, false)
+        let ratD = new Rat('ddddd', 44, 40, false)
+        let cat = new Cat('My Cat', 50, 15)
+
+        ratA.sound()
+        cat.sound()
+        cat.catchRat(ratA)
+        cat.catchRat(ratB)
+        cat.eatRat()
+    </script>
+</body>
+
+</html>

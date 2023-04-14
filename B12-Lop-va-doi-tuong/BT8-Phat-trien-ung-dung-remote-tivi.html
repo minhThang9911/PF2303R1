@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[*Bài tập] Phát triển chương trình sử dụng Remote để điều khiển Tivi</title>
+</head>
+
+<body>
+    <script>
+        class Remote {
+            constructor(code, tivi) {
+                this.code = code
+                this.tivi = tivi
+            }
+            changeChannel(channel) {
+                this.tivi.changeChannel(channel)
+            }
+            nextChannel() {
+                this.tivi.nextChannel()
+            }
+            prevChannel() {
+                this.tivi.prevChannel()
+            }
+            increaseVolume() {
+                this.tivi.increaseVolume()
+            }
+            decreaseVolume() {
+                this.tivi.decreaseVolume()
+            }
+            turnTiviOff() {
+                this.tivi.turnOff()
+            }
+            turnTiviOn() {
+                this.tivi.turnOn()
+            }
+        }
+        class TiVi {
+            #MAX_CHANNEL = 30
+            #MAX_VOLUME = 100
+            currentChannel = 0
+            currentVolume = 0
+            isOn = false
+            turnOn() {
+                if (!this.isOn) this.isOn = true
+                console.log('Tivi is On')
+            }
+            turnOff() {
+                if (this.isOn) this.isOn = false
+                console.log('Tivi is off')
+            }
+            changeChannel(channel) {
+                if (channel != this.currentChannel && channel <= this.#MAX_CHANNEL) this.currentChannel = channel
+                console.log('Channel changed to ' + channel)
+            }
+            nextChannel() {
+                if (this.currentChannel == this.#MAX_CHANNEL) this.currentChannel = 0
+                else this.currentChannel += 1
+                console.log('Channel increased to ' + this.currentChannel)
+            }
+            prevChannel() {
+                if (this.currentChannel == 0) this.currentChannel = this.#MAX_CHANNEL
+                else this.currentChannel -= 1
+                console.log('Channel decreased to ' + this.currentChannel)
+            }
+            increaseVolume() {
+                if (this.currentVolume < this.#MAX_VOLUME) {
+                    this.currentVolume += 1
+                    console.log('Volume increased to ' + this.currentVolume)
+                }
+
+            }
+            decreaseVolume() {
+                if (this.currentVolume > 0) {
+                    this.currentVolume -= 1
+                    console.log('Volume decreased to ' + this.currentVolume)
+                }
+            }
+        }
+
+        let tv = new TiVi()
+        let remote = new Remote('123', tv)
+        tv.turnOn()
+        tv.changeChannel(7)
+        remote.changeChannel(3)
+        tv.increaseVolume()
+        tv.increaseVolume()
+        remote.turnTiviOff()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Bài tập] Mô phỏng tương tác giữa hai đối tượng: công tắc và bóng đèn</title>
+</head>
+
+<body>
+    <script>
+        class EletricLamp {
+            status = false
+            turnOff() {
+                this.status = false
+            }
+            turnOn() {
+                this.status = true
+            }
+        }
+        class SwitchButton {
+            status = false
+            connectToLamp(eletricLamp) {
+                this.lamp = eletricLamp
+            }
+            switchOff() {
+                this.status = false
+                this.lamp.turnOff()
+                console.log('Lamp: ' + this.status)
+            }
+            switchOn() {
+                this.status = true
+                this.lamp.turnOn()
+                console.log('Lamp: ' + this.status)
+            }
+        }
+
+        let lamp = new EletricLamp()
+        let switchButton = new SwitchButton()
+        switchButton.connectToLamp(lamp)
+        let count = 10
+        let run = setInterval(() => {
+            if (count % 2 == 0) switchButton.switchOn()
+            else switchButton.switchOff()
+            count--
+            if (count == 0) clearInterval(run)
+        }, 1000);
+    </script>
+</body>
+
+</html>
