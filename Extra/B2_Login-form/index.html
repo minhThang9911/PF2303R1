@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="login-form">
+        <h1>Login Form</h1>
+        <div class="">
+            <label>Name: <input type="text" size="30" name="name"></label>
+            <p id="name-error" style="display: none;">Cần nhập tên!!</p>
+        </div>
+        <div class="">
+            <label>Pass: <input type="password" size="30" name="pass"></label>
+            <input type="button" value="Show pass" id="show-pass">
+            <p id="pass-error" style="display: none;">Cần nhập pass!!</p>
+        </div>
+        <input type="submit" value="Login" name="submit">
+    </form>
+
+    <script>
+        let userName = document.forms['login-form'].name
+        let userPass = document.forms['login-form'].pass
+        let btnShowPass = document.querySelector('#show-pass')
+        let btnLogin = document.forms['login-form'].submit
+
+        btnShowPass.onclick = function (e) {
+            let passType = userPass.getAttribute('type')
+            let type = 'password'
+            if (passType == type) {
+                type = 'text'
+                btnShowPass.value = 'Hide Pass'
+            } else {
+                btnShowPass.value = 'Show Pass'
+            }
+            userPass.setAttribute('type', type)
+
+        }
+
+        btnLogin.onclick = function (e) {
+            e.preventDefault()
+            function showError(field, error) {
+                let display = ''
+                if (field.value) display = 'none'
+                else display = 'block'
+                error.style.display = display
+            }
+            let nameError = document.querySelector('#name-error')
+            let passError = document.querySelector('#pass-error')
+            showError(userName,nameError)
+            showError(userPass,passError)
+        }
+        console.log(btnLogin)
+    </script>
+</body>
+
+</html>
