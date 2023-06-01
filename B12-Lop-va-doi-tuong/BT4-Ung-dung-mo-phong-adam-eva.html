@@ -36,10 +36,10 @@
                 this.gender = gender
             }
             checkApple(apple) {
-                return apple.isEmpty()
+                return !apple.isEmpty()
             }
             eatApple(apple) {
-                if (!this.checkApple(apple)) {
+                if (this.checkApple(apple)) {
                     apple.decrease()
                     this.weight++
                 }

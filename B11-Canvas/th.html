@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3;"></canvas>
+    <script>
+        let canvas = document.getElementById("myCanvas")
+        let ctx = canvas.getContext("2d");
+        let sec = 0
+        let secInterval = setInterval(() => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            drawClock()
+            moveSecond(sec)
+            sec++
+            if (sec == 60) clearInterval(secInterval)
+        }, 1000)
+
+        function drawClock() {
+            ctx.font = '20px Arial'
+            ctx.beginPath()
+            ctx.arc(500, 400, 300, 0, 2 * Math.PI)
+            ctx.stroke()
+            ctx.beginPath()
+            ctx.arc(500, 400, 10, 0, 2 * Math.PI)
+            ctx.fill()
+            ctx.fillStyle = 'red'
+            ctx.fillText('12', 490, 200)
+        }
+
+        function moveSecond(sec) {
+            let x = (500 + 300 * Math.sin(Math.PI * (sec / 30)))
+            let y = (400 - 300 * Math.cos(Math.PI * (sec / 30)))
+            ctx.moveTo(500, 400)
+            ctx.lineTo(x, y)
+            ctx.stroke()
+            console.log(x, y)
+        }
+    </script>
+</body>
+
+</html>
