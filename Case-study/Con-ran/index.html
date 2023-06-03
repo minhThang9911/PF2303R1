@@ -6,113 +6,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Con rắn</title>
+    <style>
+        #root{
+            display: flex;
+            justify-content: center;
+        }
+        .snake-game-ui .game-control>div {
+            padding: 0 20px;
+        }
+
+        .snake-game-ui .setting {
+            border-right: 1px solid #ccc;
+        }
+
+        .snake-game-ui .setting>div:not(div:last-child) {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .snake-game-ui h1 {
+            text-align: center;
+        }
+        
+
+        .snake-game-ui .game-control {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .snake-game-ui .btn-coltrol {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .snake-game-ui .btn-coltrol button {
+            width: 40%;
+            line-height: 2;
+            color: white;
+            border: 1px solid white;
+            box-shadow: 2px 2px 8px #888888;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .snake-game-ui .play-setting {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .snake-game-ui .btn-coltrol button:hover {
+            opacity: 0.8;
+        }
+
+        .snake-game-ui .btn-coltrol #btn-start {
+            background-color: green;
+        }
+
+        .snake-game-ui .btn-coltrol #btn-stop {
+            background-color: orangered;
+        }
+        
+
+        .snake-game-ui .play-setting label,
+        .snake-game-ui .color-picker label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .snake-game-ui .score-chart {
+            border-collapse: collapse;
+
+        }
+
+        .snake-game-ui .score-chart th {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .snake-game-ui .score-chart th,
+        .snake-game-ui .score-chart td {
+            width: 100px;
+            text-align: center;
+            padding: 8px 0;
+        }
+
+        .snake-game-ui .score-chart tbody tr:nth-child(1) {
+            color: red;
+            font-weight: bold;
+        }
+
+        .snake-game-ui .score-chart tbody tr:nth-child(2) {
+            color: orangered;
+            font-weight: bold;
+        }
+
+        .snake-game-ui .score-chart tbody tr:nth-child(3) {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
     <div id="root">
-        <style>
-            .snake-game-ui .game-control>div {
-                padding: 0 20px;
-            }
-
-            .snake-game-ui .setting {
-                border-right: 1px solid #ccc;
-            }
-
-            .snake-game-ui .setting>div:not(div:last-child) {
-                border-bottom: 1px solid #ccc;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-            }
-
-            .snake-game-ui h1 {
-                text-align: center;
-            }
-            
-
-            .snake-game-ui .game-control {
-                display: flex;
-                align-items: flex-start;
-            }
-
-            .snake-game-ui .btn-coltrol {
-                display: flex;
-                justify-content: space-around;
-                margin-top: 10px;
-            }
-
-            .snake-game-ui .btn-coltrol button {
-                width: 40%;
-                line-height: 2;
-                color: white;
-                border: 1px solid white;
-                box-shadow: 2px 2px 8px #888888;
-                border-radius: 5px;
-                font-size: 16px;
-                font-weight: bold;
-                text-transform: uppercase;
-                cursor: pointer;
-            }
-
-            .snake-game-ui .play-setting {
-                display: flex;
-                flex-direction: column;
-
-            }
-
-            .snake-game-ui .btn-coltrol button:hover {
-                opacity: 0.8;
-            }
-
-            .snake-game-ui .btn-coltrol #btn-start {
-                background-color: green;
-            }
-
-            .snake-game-ui .btn-coltrol #btn-stop {
-                background-color: orangered;
-            }
-            
-
-            .snake-game-ui .play-setting label,
-            .snake-game-ui .color-picker label {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin: 5px 0;
-            }
-
-            .snake-game-ui .score-chart {
-                border-collapse: collapse;
-
-            }
-
-            .snake-game-ui .score-chart th {
-                border-top: 1px solid #ccc;
-                border-bottom: 1px solid #ccc;
-                padding: 10px 0;
-            }
-            .snake-game-ui .score-chart th,
-            .snake-game-ui .score-chart td {
-                width: 100px;
-                text-align: center;
-                padding: 8px 0;
-            }
-
-            .snake-game-ui .score-chart tbody tr:nth-child(1) {
-                color: red;
-                font-weight: bold;
-            }
-
-            .snake-game-ui .score-chart tbody tr:nth-child(2) {
-                color: orangered;
-                font-weight: bold;
-            }
-
-            .snake-game-ui .score-chart tbody tr:nth-child(3) {
-                color: orange;
-                font-weight: bold;
-            }
-        </style>
+        
         <div class="snake-game-ui">
             <h1>Game Rắn ăn mồi</h1>
             <div class="game-control">
