@@ -12,6 +12,9 @@ function addTabButtonListener(btnId, title, divClass) {
         $(".content h2").innerText = title;
         $(`.content .${divClass}`).classList.add("active");
         if (btnId === "#tab-product-edit") {
+            renderEditProducList();
+        }
+        if (btnId === "#tab-product-list") {
             renderProducList();
         }
     };
@@ -39,14 +42,27 @@ $("#product-img-file").onchange = (e) => {
     handleImageChange(e.target, $("#product-img"));
 };
 
+$("#product-img-url-btn").onclick = (e) => {
+    const img = new Image();
+    const imageUrl = $("#product-img-url").value;
+    img.onload = () => {
+        $("#product-img").src = imageUrl;
+    };
+    img.onerror = () => {
+        alert("Hình ảnh không tồn tại");
+    };
+    img.src = imageUrl;
+    console.log("check img");
+};
+
 $("#save-product").onclick = () => {
-    let name = $("#product-name").value;
-    let price = $("#product-price").value;
-    let info = $("#product-info").value;
-    let productImg = $("#product-img").src;
+    const name = $("#product-name").value;
+    const price = $("#product-price").value;
+    const info = $("#product-info").value;
+    const productImg = $("#product-img").src;
     if (name && price && info && productImg) {
         const newProduct = {
-            id: +productList[productList.length-1].id +1,
+            id: +productList[productList.length - 1].id + 1,
             name,
             price,
             info,
@@ -55,7 +71,11 @@ $("#save-product").onclick = () => {
         productList.push(newProduct);
     }
     saveProductList();
-
+    $("#product-name").value = "";
+    $("#product-price").value = "";
+    $("#product-info").value = "";
+    $("#product-img").src = "./img/placeholder.png";
+    $("#product-img-url").value = "";
     alert("Sản phẩm đã lưu!!");
 };
 const getIndexOfRow = (child) =>
@@ -69,8 +89,8 @@ const deleteProduct = (child) => {
     $(".product-list #product-table").removeChild(
         $(".product-list #product-table").children[index]
     );
-    updateCount()
-    saveProductList()
+    updateCount();
+    saveProductList();
 };
 
 const editProduct = (child) => {
@@ -80,14 +100,11 @@ const editProduct = (child) => {
     });
     row.querySelector(".btn-edit").style.display = "none";
     row.querySelector(".btn-save").style.display = "block";
-    const fileInput = row.querySelector("#edit-img");
-    const imgElement = row.querySelector(".product-item-img");
-    if (typeof fileInput.onchange !== "function") {
-        fileInput.onchange = (e) => {
-            handleImageChange(e.target, imgElement);
-        };
-    }
 };
+
+const changeImage = (child) =>{
+    handleImageChange(child, child.parentElement.querySelector(".product-item-img"));
+}
 
 const saveProduct = (child) => {
     const row = child.parentElement;
@@ -110,7 +127,7 @@ const saveProduct = (child) => {
 };
 
 const updateCount = () => {
-    $("#product-count").innerText = productList.length + " Sản phẩm";
+    $("#product-count").innerText ='Tổng cộng: '+ productList.length + " Sản phẩm";
 };
 const renderOneRow = (index) => {
     let row = document.createElement("div");
@@ -119,8 +136,8 @@ const renderOneRow = (index) => {
     row.innerHTML = `
         <input type="text" class="product-item" disabled value="${productList[index].id}"
         onfocus="this.select()">
-    <label for="edit-img"><img src="${productList[index].productImg}" alt="${productList[index].name}" class="product-item-img" /></label> 
-    <input id="edit-img" type="file" class="product-item" hidden disabled>
+    <label for="edit-img-${index}"><img src="${productList[index].productImg}" alt="${productList[index].name}" class="product-item-img" /></label> 
+    <input id="edit-img-${index}" type="file" class="product-item" hidden disabled onchange = "changeImage(this)">
     <input type="text" class="product-item" disabled value="${productList[index].name}"
         onfocus="this.select()">
     <input type="text" class="product-item" disabled value="${productList[index].price}"
@@ -136,7 +153,7 @@ const renderOneRow = (index) => {
     $("#product-table").appendChild(row);
 };
 // editProduct(getIndexOfRow(this))
-function renderProducList() {
+const renderEditProducList = () => {
     productList = JSON.parse(localStorage.getItem("productList")) || [];
     $("#product-table").innerHTML = "";
     if (productList.length > 0) {
@@ -145,5 +162,41 @@ function renderProducList() {
         }
     }
     updateCount();
-}
+};
+renderEditProducList();
+
+const renderOneCol = (productItem) => {
+    const col = document.createElement("div");
+    col.className = "col";
+    col.innerHTML = `<div class="inner">    
+            <img src="${productItem.productImg}" alt="${productItem.name}"/>
+            <div>
+            <h4>${productItem.name}</h4>
+            <h5>${productItem.price}</h5>
+            <p>${productItem.info}</p>
+            </div> </div>`;
+    return col;
+};
+
+const renderProducList = () => {
+    $(".content .produc-detail").innerHTML = "";
+    if (productList.length > 0) {
+        let row = document.createElement("div");
+        row.className = "row";
+        $(".content .produc-detail").appendChild(row);
+        let index = 0;
+        const intervalId = setInterval(() => {
+            if (index % 5 == 0) {
+                row = document.createElement("div");
+                row.className = "row";
+                $(".content .produc-detail").appendChild(row);
+            }
+            row.appendChild(renderOneCol(productList[index]));
+            index++;
+            if (index == productList.length) {
+                clearInterval(intervalId);
+            }
+        }, 250);
+    }
+};
 renderProducList();
