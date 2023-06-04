@@ -1,156 +1,149 @@
-// product: name, price, id,image
-//app:products[], addProduct, editProduct, UpdateProduct, deleteProduct
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+let productList = [];
 
-class Product {
-    constructor(id, name, price, image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.image = image;
-    }
-}
-
-class App {
-    updateProduct;
-    constructor(productsInit = []) {
-        this.products = productsInit;
-    }
-
-    addProduct(product) {
-        return this.products.push(product);
-    }
-
-    deleteProduct(
-        id // xoa product
-    ) {
-        let index = this.findIndex(id);
-        if (index >= 0) {
-            this.products.splice(index, 1); // xoa bat đàu từ vị trí index
-            // 1 phần tử
-        }
-    }
-
-    editProduct(
-        id // tra ve product co id
-    ) {
-        let productEditIndex = this.findIndex(id);
-        if (productEditIndex >= 0) {
-            this.updateProduct = id;
-            let productEdit = this.products[productEditIndex];
-            let productNameEl = document.querySelector("#productName");
-            let productPriceEl = document.querySelector("#productPrice");
-            productNameEl.value = productEdit.name;
-            productPriceEl.value = productEdit.price;
-        }
-    }
-
-    updateProduct(
-        id,
-        productUpdate // update product
-    ) {}
-
-    findIndex(
-        id // vi tri trong mang
-    ) {
-        return this.products.findIndex(function (productItem) {
-            // doi tuong product
-            // console.log("product", productItem);
-            return productItem.id == id;
+const saveProductList = () =>
+    localStorage.setItem("productList", JSON.stringify(productList));
+function addTabButtonListener(btnId, title, divClass) {
+    $(btnId).onclick = () => {
+        $$(".content .active").forEach((e) => {
+            e.classList.remove("active");
         });
-    }
-
-    renderProducts() {
-        let productList = document.querySelector("#productList");
-        let productHtml = "";
-
-        for (let key in this.products) {
-            let item = this.products[key];
-            productHtml += `<tr>
-            <td>${item.id}</td>
-            <td><img src="${item.image}" width="100px" alt=""></td>
-            <td>${item.name}</td>
-            <td>${item.price}</td>
-            <td>
-                <button class="edit" data-id="${item.id}">Edit</button>
-                <button class="delete" data-id="${item.id}">Delete</button>
-            </td>
-        </tr>`;
+        $(".content h2").innerText = title;
+        $(`.content .${divClass}`).classList.add("active");
+        if (btnId === "#tab-product-edit") {
+            renderProducList();
         }
-        productList.innerHTML = productHtml;
-        let thisOfApp = this;
-        let btnEdits = document.querySelectorAll(".edit");
-        btnEdits.forEach(function (productItem) {
-            productItem.addEventListener("click", function () {
-                let id = productItem.getAttribute("data-id");
-                thisOfApp.editProduct(id);
-            });
-        });
-    }
-
-    createProduct() {
-        // lay input
-        let productNameEl = document.querySelector("#productName");
-        let productPriceEl = document.querySelector("#productPrice");
-        // console.log(Number(this.products[this.products.length - 1].id) + 1)
-        let idCreate = +this.products[this.products.length - 1].id + 1;
-
-        let productNew = new Product(
-            idCreate,
-            productNameEl.value,
-            productPriceEl.value,
-            imageLink
-        );
-        this.addProduct(productNew);
-        this.renderProducts();
-        productNameEl.value = "";
-        productPriceEl.value = "";
-    }
-
-    handleUpdate() {
-        if (this.updateProduct) {
-            let productEditIndex = this.findIndex(this.updateProduct);
-            if (productEditIndex >= 0) {
-                let productUpdateNew = this.products[productEditIndex];
-                let productNameEl = document.querySelector("#productName");
-                let productPriceEl = document.querySelector("#productPrice");
-                productUpdateNew.name = productNameEl.value;
-                productUpdateNew.price = productPriceEl.value;
-
-                this.products[productEditIndex] = productUpdateNew;
-                this.renderProducts();
-                //reset input and update id
-                productNameEl.value = "";
-                productPriceEl.value = "";
-                this.updateProduct = "";
-                // a[1] =0
-                // a[1] = 20
-            }
-        } else {
-            console.log("not");
-        }
-    }
+    };
 }
+addTabButtonListener("#tab-product-list", "Danh mục sản phẩm", "produc-detail");
+addTabButtonListener("#tab-product-edit", "Sửa đổi sản phẩm", "product-list");
+addTabButtonListener(
+    "#tab-product-add",
+    "Thêm sản phẩm mới",
+    "product-add-new"
+);
 
-let imageLink =
-    "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/7077/282959/dong-ho-befit-b4-thumbnn-600x600.jpg";
-let product = new Product("1", "IPhone", 1000, imageLink);
-let product2 = new Product(3, "IPhone2", 1000, imageLink);
-let app = new App();
-let createProductBtn = document.querySelector("#createProduct");
+const handleImageChange = (inputFile, imgElement) => {
+    const file = inputFile.files[0];
+    if (file.type.match(/image.*/)) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imgElement.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+};
 
-createProductBtn.addEventListener("click", function () {
-    console.log(this);
-    app.createProduct();
-});
+$("#product-img-file").onchange = (e) => {
+    handleImageChange(e.target, $("#product-img"));
+};
 
-let updateProductBtn = document.querySelector("#updateProduct");
+$("#save-product").onclick = () => {
+    let name = $("#product-name").value;
+    let price = $("#product-price").value;
+    let info = $("#product-info").value;
+    let productImg = $("#product-img").src;
+    if (name && price && info && productImg) {
+        const newProduct = {
+            id: +productList[productList.length-1].id +1,
+            name,
+            price,
+            info,
+            productImg,
+        };
+        productList.push(newProduct);
+    }
+    saveProductList();
 
-updateProductBtn.addEventListener("click", function () {
-    app.handleUpdate();
-});
+    alert("Sản phẩm đã lưu!!");
+};
+const getIndexOfRow = (child) =>
+    [...$(".product-list #product-table").children].indexOf(
+        child.parentElement
+    );
 
-app.addProduct(product);
-app.addProduct(product2);
+const deleteProduct = (child) => {
+    const index = getIndexOfRow(child);
+    productList.splice(index, 1);
+    $(".product-list #product-table").removeChild(
+        $(".product-list #product-table").children[index]
+    );
+    updateCount()
+    saveProductList()
+};
 
-app.renderProducts();
-console.log(app);
+const editProduct = (child) => {
+    const row = child.parentElement;
+    row.querySelectorAll(".product-item").forEach((item) => {
+        item.removeAttribute("disabled");
+    });
+    row.querySelector(".btn-edit").style.display = "none";
+    row.querySelector(".btn-save").style.display = "block";
+    const fileInput = row.querySelector("#edit-img");
+    const imgElement = row.querySelector(".product-item-img");
+    if (typeof fileInput.onchange !== "function") {
+        fileInput.onchange = (e) => {
+            handleImageChange(e.target, imgElement);
+        };
+    }
+};
+
+const saveProduct = (child) => {
+    const row = child.parentElement;
+    row.querySelector(".btn-edit").style.display = "block";
+    row.querySelector(".btn-save").style.display = "none";
+    const editedProductInfo = row.querySelectorAll(".product-item");
+    editedProductInfo.forEach((item) => {
+        item.setAttribute("disabled", "");
+    });
+    const editedProduct = {
+        id: editedProductInfo[0].value,
+        name: editedProductInfo[2].value,
+        price: editedProductInfo[3].value,
+        info: editedProductInfo[4].value,
+        productImg: row.querySelector(".product-item-img").src,
+    };
+    const index = getIndexOfRow(child);
+    productList[index] = editedProduct;
+    saveProductList();
+};
+
+const updateCount = () => {
+    $("#product-count").innerText = productList.length + " Sản phẩm";
+};
+const renderOneRow = (index) => {
+    let row = document.createElement("div");
+    row.className = "row";
+    row.setAttribute("data", index);
+    row.innerHTML = `
+        <input type="text" class="product-item" disabled value="${productList[index].id}"
+        onfocus="this.select()">
+    <label for="edit-img"><img src="${productList[index].productImg}" alt="${productList[index].name}" class="product-item-img" /></label> 
+    <input id="edit-img" type="file" class="product-item" hidden disabled>
+    <input type="text" class="product-item" disabled value="${productList[index].name}"
+        onfocus="this.select()">
+    <input type="text" class="product-item" disabled value="${productList[index].price}"
+        onfocus="this.select()">
+        <input type="text" class="product-item" disabled value="${productList[index].info}"
+        onfocus="this.select()">
+    <input type="button" class="btn btn-edit" value="Edit"
+        onclick="editProduct(this)">
+    <input type="button" class="btn btn-save" value="Save"
+        onclick="saveProduct(this)">
+    <input type="button" class="btn btn-delete" value="Delete"
+        onclick="deleteProduct(this)"> `;
+    $("#product-table").appendChild(row);
+};
+// editProduct(getIndexOfRow(this))
+function renderProducList() {
+    productList = JSON.parse(localStorage.getItem("productList")) || [];
+    $("#product-table").innerHTML = "";
+    if (productList.length > 0) {
+        for (index in productList) {
+            renderOneRow(index);
+        }
+    }
+    updateCount();
+}
+renderProducList();

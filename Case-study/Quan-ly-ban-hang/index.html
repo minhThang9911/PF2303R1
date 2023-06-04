@@ -10,30 +10,93 @@
 </head>
 
 <body>
-    <div>
-        <h1>Them moi</h1>
-        <form action="">
-            <p>Name</p>
-            <input id="productName" type="text" />
-            <p>Price</p>
-            <input id="productPrice" type="text" />
-            <button type="button" id="createProduct">Add</button>
-            <button type="button" id="updateProduct">Update</button>
-        </form>
-    </div>
+    <header>
+        <h1>Ứng dụng quản lý sản phẩm</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="nav-bar">
+                <ul>
+                    <li><button id="tab-product-list">Danh mục sản phẩm</button></li>
+                    <li><button id="tab-product-edit">Sửa đổi sản phẩm</button></li>
+                    <li><button id="tab-product-add">Thêm sản phẩm mới</button></li>
+                </ul>
+            </div>
+            <div class="content">
+                <h2>Danh mục sản phẩm</h2>
+                <div class="produc-detail "></div>
+                <div class="product-list active">
+                    <h5 id="product-count">9 Sản phẩm</h5>
+                    <div class="table-header">
+                        <h5>ID</h5>
+                        <h5>Hình</h5>
+                        <h5>Tên</h5>
+                        <h5>Giá</h5>
+                        <h5>Mô tả</h5>
+                        <h5></h5>
+                    </div>
+                    <div id="product-table">                      
+                    </div>
+                </div>
+                <div class="product-add-new">
+                    <div class="product-img-wraper">
+                        <img src="./img/t.jpeg" alt="Product" id="product-img">
+                        <input type="text" id="product-img-url" placeholder="Nhập URL hình từ internet (nếu có)" />
+                        <label for="product-img-file" id="product-img-file-btn">Chọn hình từ máy tính</label>
+                        <input type="file" id="product-img-file" tabindex="-1" />
+                    </div>
 
-    <h1>Danh sach san pham</h1>
+                    <div class="product-detail">
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="product-id">ID sản phẩm:</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" id="product-id" value="(auto ID)" disabled />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="product-name">Tên sản phẩm:</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" id="product-name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="product-price">Giá sản phẩm:</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" id="product-price" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="product-info">Chi tiết sản phẩm:</label>
+                            </div>
+                            <div class="col-2">
+                                <textarea id="product-info"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button id="save-product">Lưu sản phẩm</button>
+                        </div>
+                    </div>
+                </div>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        <tbody id="productList"></tbody>
-    </table>
+            </div>
+            <div class="" style="display: none;">
+                <h2>Add New Product</h2>
+                <div class="add-product">
+                    <input type="text" id="input-new-product">
+                    <input type="button" class="btn" value="Add" onclick="addProduct()">
+                </div>
+            </div>
+        </div>
+
+
+    </main>
     <script src="./app.js"></script>
 </body>
 
