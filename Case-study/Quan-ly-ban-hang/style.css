@@ -175,6 +175,8 @@ button,
 
 .product-add-new .row #save-product {
     width: 100%;
+    background-color: #387a38;
+    color: #fff;
 }
 
 .content .product-list {
