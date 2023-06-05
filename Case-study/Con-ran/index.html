@@ -6,207 +6,155 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Con rắn</title>
-    <style>
-        #root{
-            display: flex;
-            justify-content: center;
-        }
-        .snake-game-ui .game-control>div {
-            padding: 0 20px;
-        }
-
-        .snake-game-ui .setting {
-            border-right: 1px solid #ccc;
-        }
-
-        .snake-game-ui .setting>div:not(div:last-child) {
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-        }
-
-        .snake-game-ui h1 {
-            text-align: center;
-        }
-        
-
-        .snake-game-ui .game-control {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .snake-game-ui .btn-coltrol {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
-        }
-
-        .snake-game-ui .btn-coltrol button {
-            width: 40%;
-            line-height: 2;
-            color: white;
-            border: 1px solid white;
-            box-shadow: 2px 2px 8px #888888;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .snake-game-ui .play-setting {
-            display: flex;
-            flex-direction: column;
-
-        }
-
-        .snake-game-ui .btn-coltrol button:hover {
-            opacity: 0.8;
-        }
-
-        .snake-game-ui .btn-coltrol #btn-start {
-            background-color: green;
-        }
-
-        .snake-game-ui .btn-coltrol #btn-stop {
-            background-color: orangered;
-        }
-        
-
-        .snake-game-ui .play-setting label,
-        .snake-game-ui .color-picker label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 5px 0;
-        }
-
-        .snake-game-ui .score-chart {
-            border-collapse: collapse;
-
-        }
-
-        .snake-game-ui .score-chart th {
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-        }
-        .snake-game-ui .score-chart th,
-        .snake-game-ui .score-chart td {
-            width: 100px;
-            text-align: center;
-            padding: 8px 0;
-        }
-
-        .snake-game-ui .score-chart tbody tr:nth-child(1) {
-            color: red;
-            font-weight: bold;
-        }
-
-        .snake-game-ui .score-chart tbody tr:nth-child(2) {
-            color: orangered;
-            font-weight: bold;
-        }
-
-        .snake-game-ui .score-chart tbody tr:nth-child(3) {
-            color: orange;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
     <div id="root">
-        
         <div class="snake-game-ui">
-            <h1>Game Rắn ăn mồi</h1>
+            <h1>Snake game</h1>
+            <h1>Score: <span id='current-score'>0</span></h1>
+            <div class="text-center"><canvas id="board"></canvas></div>
+            <div class="game-setting">
+                <button id="btn-start">New game</button>
+                <button id="btn-stop">Pause</button>
+                <button id="btn-setting">Setting</button>
+                <button id="btn-score-board">Rank</button>
+            </div>
             <div class="game-control">
-                <canvas id="board"></canvas>
-
-                <div class="setting">
-                    <div class="btn-coltrol">
-                        <button id="btn-start">Bắt đầu</button>
-                        <button id="btn-stop">Tạm dừng</button>
-                    </div>
-                    <div class="play-setting">
-                        <label><span>Chọn cấp độ khó:</span> <select id="level">
-                                <option value=0>Gà mờ</option>
-                                <option value=1>Người mới</option>
-                                <option value=2>Biết chơi</option>
-                                <option value=3>Cao thủ</option>
-                                <option value=4>Chuyên nghiệp</option>
-                            </select></label>
-                        <label>
-                            <span>Số ô chiều ngang:</span> <input id="board-width" type="number" value="20" />
-                        </label>
-                        <label>
-                            <span>Số ô chiều dọc:</span> <input id="board-height" type="number" value="20" />
-                        </label>
-                    </div>
-                    <div class="color-picker">
-                        <label>
-                            <span>Màu bảng:</span> <input id="board-color" type="color" value="#000000" />
-                        </label>
-                        <label>
-                            <span>Màu thức ăn:</span> <input id="food-color" type="color" value="#928f6d" />
-                        </label>
-                        <label>
-                            <span>Màu đầu rắn:</span><input id="head-color" type="color" value="#ff0000" />
-                        </label>
-                        <label>
-                            <span>Màu thân rắn:</span> <input id="body-color" type="color" value="#0c68f3" />
-                        </label>
-                        <label>
-                            <span>Màu đuôi rắn:</span> <input id="tail-color" type="color" value="#ffffff" />
-                        </label>
-                    </div>
-                    <div class="other-setting">
-                        <label>Hiện lưới: <input id="show-grid" type="checkbox" /></label>
-                    </div>
-                    <div>
-                        <h4>Điều khiển rắn: Nút mũi tên ( ⇦ ⇨ ⇧ ⇩ )</h4>
-                        <h4>Bắt đầu: [Enter]</h4>
-                        <h4>Tạm dừng: [ESC]</h4>
-                    </div>
-                </div>
+                <div><button id="go-up"><i class="fa-solid fa-circle-up"></i></button></div>
                 <div>
-                    <h1>Điểm: <span id='current-score'>0</span></h1>
-                    <table class="score-chart">
-                        <thead>
-                            <tr>
-                                <th>Thứ hạng</th>
-                                <th>Tên</th>
-                                <th>Điểm</th>
-                            </tr>
-                        </thead>
-                        <tbody id="score-table">
-                            <tr>
-                                <td>1</td>
-                                <td>aaaaaa</td>
-                                <td>125</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>aaaaaa</td>
-                                <td>125</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>aaaaaa</td>
-                                <td>125</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>aaaaaa</td>
-                                <td>125</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <button id="go-left"><i class="fa-solid fa-circle-left"></i></button>
+                    <button id="go-middle"><i class="fa-solid fa-circle"></i></button>
+                    <button id="go-right"><i class="fa-solid fa-circle-right"></i></button>
+                </div>
+                <div><button id="go-down"><i class="fa-solid fa-circle-down"></i></button></div>
+            </div>
+        </div>
+        <div class="modal" id="setting-modal">
+            <div class="inner">
+                <div class="setting">
+                    <div class="">
+                        <div class="text-center">
+                            <h1>Game Setting</h1>
+                        </div>
+                        <div class="play-setting">
+                            <label><span>Game play:</span> <select id="level">
+                                    <option value=0>Easy</option>
+                                    <option value=1>Medium</option>
+                                    <option value=2>Hard</option>
+                                    <option value=3>Extreme</option>
+                                    <option value=4>Nightmare</option>
+                                </select></label>
+                            <label>
+                                <span>Board width:</span> <input id="board-width" type="number" value="20" />
+                            </label>
+                            <label>
+                                <span>Board height:</span> <input id="board-height" type="number" value="20" />
+                            </label>
+                        </div>
+                        <div class="color-picker">
+                            <label>
+                                <span>Board color:</span> <input id="board-color" type="color" value="#000000" />
+                            </label>
+                            <label>
+                                <span>Food color:</span> <input id="food-color" type="color" value="#928f6d" />
+                            </label>
+                            <label>
+                                <span>Snake head color:</span><input id="head-color" type="color" value="#ff0000" />
+                            </label>
+                            <label>
+                                <span>Snake body color:</span> <input id="body-color" type="color" value="#0c68f3" />
+                            </label>
+                            <label>
+                                <span>Snake tail color:</span> <input id="tail-color" type="color" value="#ffffff" />
+                            </label>
+                        </div>
+                        <div class="other-setting">
+                            <label>Show grid: <input id="show-grid" type="checkbox" /></label>
+                        </div>
+                        <div>
+                            <h4>Control: Arrow key ( ⇦ ⇨ ⇧ ⇩ )</h4>
+                            <h4>New game: [Enter]</h4>
+                            <h4>Pause game: [ESC]</h4>
+                        </div>
+                    </div>
+                    <div class="text-center"><button id="btn-save-setting">Save</button></div>
                 </div>
             </div>
         </div>
+        <div class="modal" id="score-chart-modal">
+            <div class="inner">
+                <table class="score-chart">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="score-table">
+                        <tr>
+                            <td>1</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>aaaaaa</td>
+                            <td>125</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="text-center"><button id="btn-close-score-board">Close</button></div>
+            </div>
+        </div>
     </div>
-    <script src="./app.js"></script>
+    <script src="./assets/js/snake.js"></script>
 </body>
 
 </html>

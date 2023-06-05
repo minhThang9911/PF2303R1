@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    line-height: 2;
+    border: 1px solid white;
+    box-shadow: 2px 2px 8px #888888;
+    border-radius: 0.5em;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.snake-game-ui h1 {
+    text-align: center;
+}
+
+.snake-game-ui .game-setting {
+    text-align: center;
+    padding: 0.5em 0;
+}
+
+.snake-game-ui .game-setting button {
+    margin: 0.2em;
+    min-width: 6em;
+}
+
+.snake-game-ui .game-control div {
+    text-align: center;
+}
+
+#go-middle,
+#go-up,
+#go-down,
+#go-left,
+#go-right {
+    font-size: 2em;
+    line-height: 1em;
+}
+
+#go-middle {
+    width: 2em;
+    height: 2em;
+    margin: 0.2em;
+    visibility:hidden;
+}
+
+#go-up,
+#go-down {
+    height: 3em;
+    width: 2em;
+}
+#go-left,
+#go-right {
+    width: 3em;
+    height: 2em;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal .inner {
+    margin: 10vh 0;
+    width: 90vw;
+    max-width: 30em;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 1em;
+    overflow-y: auto;
+}
+
+.modal .inner::-webkit-scrollbar {
+    display: none;
+}
+
+.modal .inner {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+.setting {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    font-size: 1.5em;
+}
+.setting h1 {
+    padding-bottom: 0.5em;
+}
+.setting h4 {
+    padding: 0.5em 0;
+}
+
+.setting .play-setting {
+    display: flex;
+    flex-direction: column;
+}
+.setting .play-setting label,
+.setting .color-picker label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.setting .play-setting input{
+    font-size: 1em;
+}
+
+.setting .play-setting select{
+    font-size: 1em;
+    width: 50%;
+}
+
+#btn-save-setting {
+    width: 50%;
+}
+
+.inner .score-chart {
+    border-collapse: collapse;
+    width: 100%;
+    min-height: 70vh;
+    margin-bottom: 0.5em;
+}
+
+.inner .score-chart th {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.inner .score-chart th,
+.inner .score-chart td {
+    width: 100px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.inner .score-chart tbody tr:nth-child(1) {
+    color: red;
+    font-weight: bold;
+}
+
+.inner .score-chart tbody tr:nth-child(2) {
+    color: orangered;
+    font-weight: bold;
+}
+
+.inner .score-chart tbody tr:nth-child(3) {
+    color: orange;
+    font-weight: bold;
+}
+
+#btn-close-score-board {
+    width: 50%;
+}
