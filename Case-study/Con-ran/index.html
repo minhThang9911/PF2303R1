@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Con rắn</title>
+    <title>Snake game</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,11 +16,11 @@
     <div id="root">
         <div class="snake-game-ui">
             <h1>Snake game</h1>
-            <h1>Score: <span id='current-score'>0</span></h1>
+            <h2>Score: <span id='current-score'>0</span></h2>
             <audio id="game-bg-music" src="./assets/audios/backgroud.mp3" loop autoplay>
                 No audio suport
             </audio>
-            <audio id="game-sfx" src="">
+            <audio id="game-sfx" audio.src="">
                 No audio suport
             </audio>
             <div class="text-center"><canvas id="board"></canvas></div>
@@ -81,7 +81,8 @@
                         </div>
                         <div class="other-setting">
                             <label><span>Show grid: </span><input id="show-grid" type="checkbox" /></label>
-                            <label><span>Sound volume: </span><input id="sound-volume" type="range" min = 0 max=1 step=0.01 value=1/></label>
+                            <label><span>Sound volume: </span><input id="sound-volume" type="range" min=0 max=1
+                                    step=0.01 value=1 /></label>
                             <label><span>Mute: </span><input id="sound-mute" type="checkbox" /></label>
                         </div>
 
@@ -106,56 +107,6 @@
                         </tr>
                     </thead>
                     <tbody id="score-table">
-                        <tr>
-                            <td>1</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>aaaaaa</td>
-                            <td>125</td>
-                        </tr>
 
                     </tbody>
                 </table>

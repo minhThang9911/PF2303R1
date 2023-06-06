@@ -3,21 +3,86 @@
     padding: 0;
     margin: 0;
 }
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
 
 #root {
     display: flex;
     justify-content: center;
 }
 
+.snake-game-ui > h1 {
+    text-transform: uppercase;
+    background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    font-size: 2em;
+}
+
+.snake-game-ui > h2{
+    text-align: center;
+    font-size: 3em;
+    color: #f24f4d;
+}
 button {
+    width: 8em;
     line-height: 2;
-    border: 1px solid white;
     box-shadow: 2px 2px 8px #888888;
     border-radius: 0.5em;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
+    position: relative;
+    background: #1aab8a;
+    color: rgb(0, 0, 0);
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #fff;
+}
+
+.game-setting button:hover {
+    background: #fff;
+    color: #1aab8a;
+}
+.game-setting button:before,
+.game-setting button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 2px;
+    width: 0;
+    background: #1aab8a;
+    transition: 400ms ease all;
+}
+.game-setting button:after {
+    right: inherit;
+    top: inherit;
+    left: 10px;
+    bottom: 0;
+}
+.game-setting button:hover:before,
+.game-setting button:hover:after {
+    width: 70%;
+    transition: 800ms ease all;
 }
 
 .text-center {
@@ -38,8 +103,38 @@ button {
     min-width: 6em;
 }
 
+#btn-start {
+    background-color: #fe78aa;
+}
+
+#btn-start:hover {
+    background: #fff;
+    color: #fe78aa;
+}
+
+#btn-start:before,
+#btn-start:after {
+    background: #fe78aa;
+}
+
 .snake-game-ui .game-control div {
     text-align: center;
+}
+
+#go-up:hover,
+#go-up:focus,
+#go-up:active,
+#go-down:hover,
+#go-down:focus,
+#go-down:active,
+#go-left:hover,
+#go-left:focus,
+#go-left:active,
+#go-right:hover,
+#go-right:focus,
+#go-right:active {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 #go-middle,
@@ -49,13 +144,14 @@ button {
 #go-right {
     font-size: 2em;
     line-height: 1em;
+    background-color: #00b0da;
 }
 
 #go-middle {
     width: 2em;
     height: 2em;
     margin: 0.2em;
-    visibility:hidden;
+    visibility: hidden;
 }
 
 #go-up,
@@ -85,7 +181,7 @@ button {
 }
 
 .modal .inner {
-    margin: 10vh 0;
+    margin: 5vh 0;
     width: 90vw;
     max-width: 30em;
     padding: 1em;
@@ -99,8 +195,8 @@ button {
 }
 
 .modal .inner {
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .setting {
     display: flex;
@@ -128,21 +224,28 @@ button {
     margin: 5px 0;
 }
 
-#sound-volume{
+#sound-volume {
     width: 60%;
 }
 
-.setting .play-setting input{
+.setting .play-setting input {
     font-size: 1em;
 }
 
-.setting .play-setting select{
+.setting .play-setting select {
     font-size: 1em;
     width: 50%;
 }
-
+#btn-close-score-board,
 #btn-save-setting {
     width: 50%;
+    margin-bottom: 1em;
+}
+
+#score-chart-modal .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .inner .score-chart {
@@ -150,6 +253,8 @@ button {
     width: 100%;
     min-height: 70vh;
     margin-bottom: 0.5em;
+    flex-grow: 1;
+    table-layout: fixed;
 }
 
 .inner .score-chart th {
@@ -161,6 +266,7 @@ button {
     width: 100px;
     text-align: center;
     font-size: 1.5em;
+    height: 1em;
 }
 
 .inner .score-chart tbody tr:nth-child(1) {
@@ -176,8 +282,4 @@ button {
 .inner .score-chart tbody tr:nth-child(3) {
     color: orange;
     font-weight: bold;
-}
-
-#btn-close-score-board {
-    width: 50%;
 }
