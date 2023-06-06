@@ -17,6 +17,12 @@
         <div class="snake-game-ui">
             <h1>Snake game</h1>
             <h1>Score: <span id='current-score'>0</span></h1>
+            <audio id="game-bg-music" src="./assets/audios/backgroud.mp3" loop autoplay>
+                No audio suport
+            </audio>
+            <audio id="game-sfx" src="">
+                No audio suport
+            </audio>
             <div class="text-center"><canvas id="board"></canvas></div>
             <div class="game-setting">
                 <button id="btn-start">New game</button>
@@ -74,8 +80,11 @@
                             </label>
                         </div>
                         <div class="other-setting">
-                            <label>Show grid: <input id="show-grid" type="checkbox" /></label>
+                            <label><span>Show grid: </span><input id="show-grid" type="checkbox" /></label>
+                            <label><span>Sound volume: </span><input id="sound-volume" type="range" min = 0 max=1 step=0.01 value=1/></label>
+                            <label><span>Mute: </span><input id="sound-mute" type="checkbox" /></label>
                         </div>
+
                         <div>
                             <h4>Control: Arrow key ( ⇦ ⇨ ⇧ ⇩ )</h4>
                             <h4>New game: [Enter]</h4>
