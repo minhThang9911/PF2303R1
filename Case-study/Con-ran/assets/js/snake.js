@@ -46,16 +46,15 @@ class App {
         if (audio.src != audio) {
             audio.src = audioSrc;
         }
-		audio.oncanplaythrough = () => {
-			audio.play();
-		}
-        
+        audio.oncanplaythrough = () => {
+            audio.play();
+        };
     };
 
     existInSnakeBody = (block) =>
-        this.snakeBody.some(
-            (item) => item[0] == block[0] && item[1] == block[1]
-        );
+        this.snakeBody
+            .slice(0, -1)
+            .some((item) => item[0] == block[0] && item[1] == block[1]);
     drawSnake = (x, y, isHead, isTail) => {
         let snakeColor = this.gameSetting.bodyColor;
         if (isTail) {
@@ -180,7 +179,7 @@ class App {
         this.scoreBoard =
             JSON.parse(localStorage.getItem("snakeGameScoreBoard")) || [];
         this.setting.setSpeed(this.gameSetting.level);
-        if (this.gameSetting.volume !=undefined) {
+        if (this.gameSetting.volume != undefined) {
             document.querySelector("#game-bg-music").volume =
                 this.gameSetting.volume;
             document.querySelector("#game-sfx").volume =

@@ -135,6 +135,7 @@ button {
 #go-right:active {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
+    background-color: #0e58f0;
 }
 
 #go-middle,
