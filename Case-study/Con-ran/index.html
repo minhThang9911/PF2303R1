@@ -1,120 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Snake game</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+			integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="./assets/css/style.css" />
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake game</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+	<body>
+		<div id="root">
+			<div class="snake-game-ui">
+				<h1>Snake game</h1>
+				<h2>Score: <span id="current-score">0</span></h2>
+				<audio
+					id="game-bg-music"
+					src="./assets/audios/backgroud.mp3"
+					loop
+					autoplay>
+					No audio suport
+				</audio>
+				<audio id="game-sfx" audio.src="">No audio suport</audio>
+				<div class="text-center"><canvas id="board"></canvas></div>
+				<div class="game-setting">
+					<button id="btn-start">New game</button>
+					<button id="btn-stop">Pause</button>
+					<button id="btn-setting">Setting</button>
+					<button id="btn-score-board">Rank</button>
+				</div>
+				<div class="game-control">
+					<div>
+						<button id="go-up">
+							<i class="fa-solid fa-circle-up"></i>
+						</button>
+					</div>
+					<div>
+						<button id="go-left">
+							<i class="fa-solid fa-circle-left"></i>
+						</button>
+						<button id="go-middle">
+							<i class="fa-solid fa-circle"></i>
+						</button>
+						<button id="go-right">
+							<i class="fa-solid fa-circle-right"></i>
+						</button>
+					</div>
+					<div>
+						<button id="go-down">
+							<i class="fa-solid fa-circle-down"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal" id="setting-modal">
+				<div class="inner">
+					<div class="setting">
+						<div class="">
+							<div class="text-center">
+								<h1>Game Setting</h1>
+							</div>
+							<div class="play-setting">
+								<label
+									><span>Game play:</span>
+									<select id="level">
+										<option value="0">Easy</option>
+										<option value="1">Medium</option>
+										<option value="2">Hard</option>
+										<option value="3">Extreme</option>
+										<option value="4">Nightmare</option>
+									</select></label
+								>
+								<label>
+									<span>Snake size:</span>
+									<input
+										id="block-size"
+										type="number"
+										value="30" />
+								</label>
+								<label>
+									<span>Board width:</span>
+									<input
+										id="board-width"
+										type="number"
+										value="20" />
+								</label>
+								<label>
+									<span>Board height:</span>
+									<input
+										id="board-height"
+										type="number"
+										value="20" />
+								</label>
+							</div>
+							<div class="color-picker">
+								<label>
+									<span>Board color:</span>
+									<input
+										id="board-color"
+										type="color"
+										value="#000000" />
+								</label>
+								<label>
+									<span>Food color:</span>
+									<input
+										id="food-color"
+										type="color"
+										value="#928f6d" />
+								</label>
+								<label>
+									<span>Snake head color:</span
+									><input
+										id="head-color"
+										type="color"
+										value="#ff0000" />
+								</label>
+								<label>
+									<span>Snake body color:</span>
+									<input
+										id="body-color"
+										type="color"
+										value="#0c68f3" />
+								</label>
+								<label>
+									<span>Snake tail color:</span>
+									<input
+										id="tail-color"
+										type="color"
+										value="#ffffff" />
+								</label>
+							</div>
+							<div class="other-setting">
+								<label
+									><span>Show grid: </span
+									><input id="show-grid" type="checkbox"
+								/></label>
+								<label
+									><span>Sound volume: </span
+									><input
+										id="sound-volume"
+										type="range"
+										min="0"
+										max="1"
+										step="0.01"
+										value="1"
+								/></label>
+								<label
+									><span>Mute: </span
+									><input id="sound-mute" type="checkbox"
+								/></label>
+							</div>
 
-<body>
-    <div id="root">
-        <div class="snake-game-ui">
-            <h1>Snake game</h1>
-            <h2>Score: <span id='current-score'>0</span></h2>
-            <audio id="game-bg-music" src="./assets/audios/backgroud.mp3" loop autoplay>
-                No audio suport
-            </audio>
-            <audio id="game-sfx" audio.src="">
-                No audio suport
-            </audio>
-            <div class="text-center"><canvas id="board"></canvas></div>
-            <div class="game-setting">
-                <button id="btn-start">New game</button>
-                <button id="btn-stop">Pause</button>
-                <button id="btn-setting">Setting</button>
-                <button id="btn-score-board">Rank</button>
-            </div>
-            <div class="game-control">
-                <div><button id="go-up"><i class="fa-solid fa-circle-up"></i></button></div>
-                <div>
-                    <button id="go-left"><i class="fa-solid fa-circle-left"></i></button>
-                    <button id="go-middle"><i class="fa-solid fa-circle"></i></button>
-                    <button id="go-right"><i class="fa-solid fa-circle-right"></i></button>
-                </div>
-                <div><button id="go-down"><i class="fa-solid fa-circle-down"></i></button></div>
-            </div>
-        </div>
-        <div class="modal" id="setting-modal">
-            <div class="inner">
-                <div class="setting">
-                    <div class="">
-                        <div class="text-center">
-                            <h1>Game Setting</h1>
-                        </div>
-                        <div class="play-setting">
-                            <label><span>Game play:</span> <select id="level">
-                                    <option value=0>Easy</option>
-                                    <option value=1>Medium</option>
-                                    <option value=2>Hard</option>
-                                    <option value=3>Extreme</option>
-                                    <option value=4>Nightmare</option>
-                                </select></label>
-                            <label>
-                                <span>Board width:</span> <input id="board-width" type="number" value="20" />
-                            </label>
-                            <label>
-                                <span>Board height:</span> <input id="board-height" type="number" value="20" />
-                            </label>
-                        </div>
-                        <div class="color-picker">
-                            <label>
-                                <span>Board color:</span> <input id="board-color" type="color" value="#000000" />
-                            </label>
-                            <label>
-                                <span>Food color:</span> <input id="food-color" type="color" value="#928f6d" />
-                            </label>
-                            <label>
-                                <span>Snake head color:</span><input id="head-color" type="color" value="#ff0000" />
-                            </label>
-                            <label>
-                                <span>Snake body color:</span> <input id="body-color" type="color" value="#0c68f3" />
-                            </label>
-                            <label>
-                                <span>Snake tail color:</span> <input id="tail-color" type="color" value="#ffffff" />
-                            </label>
-                        </div>
-                        <div class="other-setting">
-                            <label><span>Show grid: </span><input id="show-grid" type="checkbox" /></label>
-                            <label><span>Sound volume: </span><input id="sound-volume" type="range" min=0 max=1
-                                    step=0.01 value=1 /></label>
-                            <label><span>Mute: </span><input id="sound-mute" type="checkbox" /></label>
-                        </div>
-
-                        <div>
-                            <h4>Control: Arrow key ( ⇦ ⇨ ⇧ ⇩ )</h4>
-                            <h4>New game: [Enter]</h4>
-                            <h4>Pause game: [ESC]</h4>
-                        </div>
-                    </div>
-                    <div class="text-center"><button id="btn-save-setting">Save</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="modal" id="score-chart-modal">
-            <div class="inner">
-                <table class="score-chart">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="score-table">
-
-                    </tbody>
-                </table>
-                <div class="text-center"><button id="btn-close-score-board">Close</button></div>
-            </div>
-        </div>
-    </div>
-    <script src="./assets/js/snake.js"></script>
-</body>
-
+							<div>
+								<h4>Control: Arrow key ( ⇦ ⇨ ⇧ ⇩ )</h4>
+								<h4>New game: [Enter]</h4>
+								<h4>Pause game: [ESC]</h4>
+							</div>
+						</div>
+						<div class="text-center">
+							<button id="btn-save-setting">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal" id="score-chart-modal">
+				<div class="inner">
+					<table class="score-chart">
+						<thead>
+							<tr>
+								<th>Rank</th>
+								<th>Name</th>
+								<th>Score</th>
+							</tr>
+						</thead>
+						<tbody id="score-table"></tbody>
+					</table>
+					<div class="text-center">
+						<button id="btn-close-score-board">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./assets/js/snake.js"></script>
+	</body>
 </html>
